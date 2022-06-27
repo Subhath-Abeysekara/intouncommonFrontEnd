@@ -1,0 +1,169 @@
+
+.main{
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+.headhome{
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    background: rgb(102, 101, 101);
+}
+.bodyhome{
+    position: absolute;
+    width: 100%;
+    height: 524px;
+    background: black;
+    top: 100px;
+}
+.logo{
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+.hometheme{
+    position: absolute;
+    color: rgb(145, 143, 143);
+    top: -10px;
+    left: 450px;
+}
+.text1{
+    position: absolute;
+    color: white;
+    top: 50px;
+    left: 470px;
+}
+.text2,.text3{
+    position: absolute;
+    color: rgb(236, 202, 9);
+    left: 900px;
+    top: 10px;
+}
+.text3{
+    top: 36px;
+
+}
+.underline1,.underline2{
+    position: absolute;
+    width: 300px;
+    height: 2px;
+    background: rgb(145, 143, 143);
+    left: 455px;
+    top: 50px;
+}
+.underline2{
+    top: 53px;
+    width: 304px;
+    left: 453px;
+}
+.addHolder{
+    position: absolute;
+    width: 800px;
+    height: 350px;
+    left: 350px;
+    top: 100px;
+    background: white;
+}
+.adHolder{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0;
+}
+.imageLogo{
+    position: absolute;
+    width: 100%;
+    height: 120%;
+    left: -30px;
+    top: -10px;
+}
+.image{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.uncommonProduct,.commonProduct,.uncommonProject{
+    position: absolute;
+    width: 250px;
+    height: auto;
+    left: 0;
+    top: 10px;
+    transition: background 0.5s;
+    color: white;
+    padding-left:1% ;
+}
+.commonProduct{
+    left: 400px;
+}
+.uncommonProject{
+    left: 800px;
+}
+.uncommonProduct:hover,.commonProduct:hover,.uncommonProject:hover{
+    background: rgb(20, 20, 20);
+    cursor: pointer;
+}
+.text00{
+    position: absolute;
+    color: rgb(235, 231, 22);
+    top: 20px;
+    z-index: 2;
+}
+.cover{
+    position: absolute;
+    width: 230px;
+    height: 100%;
+    background: black;
+    right: 0;
+
+}
+.loginink{
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    color: solid white;
+    right:0 ;
+    bottom: 10px;
+}
+.moveLeftCurrentSlide{
+    animation-name: moveLeftCurrent;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+
+}
+@keyframes moveLeftCurrent{
+    from{
+        left: 100%;
+        width: 200px;
+        opacity: 1;
+    }
+    to{
+        left: 0;
+        opacity: 1;
+        width: 800px;
+    }
+}
+
+.moveRightCurrentSlide{
+    animation-name: moveRightCurrent;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+
+}
+@keyframes moveRightCurrent{
+    from{
+        left: 0;
+        width: 800px;
+        opacity: 1;
+    }
+    to{
+        left: 100%;
+        opacity: 1;
+        width: 200px;
+    }
+}

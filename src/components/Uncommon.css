@@ -1,0 +1,363 @@
+.main{
+    position: relative;
+}
+.head{
+    position: absolute;
+    width: 97%;
+    left: 3%;
+    height: 100px;
+    background: rgb(102, 101, 101);
+    padding-left: 1%;
+}
+.link1{
+    position: absolute;
+    color: rgb(91, 57, 155);
+    font-size: 20px;
+    right: 10px;
+    transition: color 0.5s;
+}
+
+.roof{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    right: 77px;
+    top: 14px;
+    border: 10px solid black;
+    border-top: none;
+    border-left: none;
+    transform: rotate(-135deg);
+    transition: background 0.5s;
+    background: rgb(223, 154, 7);
+}
+.home{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    right: 72px;
+    top: 28px;
+    border: 10px solid black;
+    border-top: none;
+    background: rgb(223, 154, 7);
+    transition: background 0.5s;
+
+}
+.home:hover,.roof:hover{
+    background: rgb(223, 39, 7);
+    
+}
+.link1:hover{
+    color: rgb(223, 39, 7);
+}
+.borderBottom{
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: black;
+    bottom: 0;
+}
+.header{
+    position: absolute;
+    bottom: 15%;
+}
+.header2{
+    position: absolute;
+    bottom: 0;
+}
+.body{
+    position: absolute;
+    height: auto;
+    width: 100%;
+    top: 160px;
+}
+.product{
+    position: relative;
+    width: 95%;
+    height: 740px;
+    background: rgb(231, 229, 229);
+    left: 2%;
+}
+
+.imageHolder{
+    position: absolute;
+    width: 350px;
+    height: 400px;
+    background: white;
+    left: 2px;
+    top: 2px;
+}
+.leftHandler{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 0;
+    top: 175px;
+    border: 10px solid black;
+    border-top: none;
+    border-left: none;
+    transform: rotate(135deg);
+    transition: background 0.5s;
+}
+.leftHandler:hover{
+    background: rgb(87, 85, 85);
+    cursor: pointer;
+}
+
+.rightHandler{
+    position: absolute;
+    display: block;
+    width: 0px;
+    height: 0px;
+    border:15px solid transparent;
+    border-right-color: #ccc;
+    border-left-width: 0px;
+    transform: rotate(180deg);
+    transition: background 0.5s;
+}
+.rightHandler:hover{
+    border-right-color: black;
+    cursor: pointer;
+}
+.theme{
+    position: absolute;
+    top: 0;
+    right: 17%;
+
+}
+
+.productid{
+    position: absolute;
+    top: 105px;
+    left: 60%;
+}
+.productName{
+    position: absolute;
+    top: 55px;
+    left: 60%;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+.type{
+    position: absolute;
+    top: 125px;
+    left: 60%;
+}
+.size{
+    position: absolute;
+    top: 200px;
+    left: 45%;
+}
+.metiriar{
+    position: absolute;
+    top: 230px;
+    left: 45%;
+}
+.color{
+    position: absolute;
+    top: 260px;
+    left: 45%;
+}
+.option{
+    position: absolute;
+    top: 290px;
+    left: 45%;
+}
+.usage{
+    position: absolute;
+    top: 350px;
+    left: 45%;
+    color: rgb(221, 160, 27);
+    font-size: 18px;
+}
+.specialUse{
+    top: 400px;
+}
+.price{
+    position: absolute;
+    top: 450px;
+    left: 45%;
+}
+.warranty{
+    position: absolute;
+    top: 470px;
+    left: 45%;
+}
+.delivery{
+    position: absolute;
+    top: 490px;
+    left: 45%;
+}
+.special{
+    position: absolute;
+    top: 550px;
+    left: 50%;
+    width: 30%;
+    height: 100px;
+    background: white;
+    padding: 0 0 0 1%;
+}
+.colorSymble{
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    background: rgb(153, 1, 1);
+}
+.symble1{
+    left: 10px;
+    top: 465px;
+    
+}
+.symble2{
+    left: 10px;
+    top: 495px;
+}
+.symble3{
+    left: 10px;
+    top: 525px;
+}
+.symble4{
+    left: 10px;
+    top: 555px;
+}
+.benifit{
+    position: absolute;
+    top: 405px;
+    left: 50px;
+}
+.repay{
+    top: 450px;
+    color: red;
+
+}
+.change{
+    top: 480px;
+    color: red;
+
+}
+.afterwarrnty{
+    top: 510px;
+    color: red;
+
+}
+.discount{
+    top: 540px;
+    color: red;
+
+}
+.warantyfiread{
+    position: absolute;
+    color: black;
+    font-size: 12px;
+    left: 205px;
+    top: 518px;
+}
+.after{
+    position: absolute;
+    color: black;
+    font-size: 12px;
+    left: 125px;
+    top: 548px;
+}
+.half{
+    position: absolute;
+    color: red;
+    font-size: 12px;
+    left: 205px;
+    top: 548px;
+}
+.contact{
+    position: absolute;
+    top: 600px;
+    left: 10px;
+}
+.msg{
+    position: absolute;
+    top: 620px;
+    left: 10px;
+    color: rgb(245, 61, 61);
+    font-size: 14px;
+}
+.name{
+    top: 450px;
+    left: 10px;
+}
+.address{
+    top: 480px;
+    left: 10px;
+}
+.blackSymble{
+    position: absolute;
+    height: 90px;
+    width: 2px;
+    background: black;
+    top: 31%;
+    left: 44%;
+}
+
+.borderBottom2{
+    bottom: 70px;
+}
+.madein{
+    position: absolute;
+    bottom: 10px;
+    left: 50px;
+    font-size: 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.design{
+    position: absolute;
+    bottom: 10px;
+    left: 300px;
+    font-size: 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.quality{
+    position: absolute;
+    bottom: 10px;
+    left: 600px;
+    font-size: 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.inventor{
+    position: absolute;
+    bottom: 10px;
+    left: 900px;
+    font-size: 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.colorBox{
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 30%;
+    background: black;
+    bottom: 22px;
+}
+.box1{
+    
+    left: 10px;
+}
+.box2{
+    
+    left: 260px;
+}
+.box3{
+    
+    left: 560px;
+}
+
+.box4{
+    
+    left: 860px;
+}
+
+.ball{
+    position: absolute;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    background: rgb(238, 137, 5);
+    top: 3px;
+    left: 3px;
+}
