@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 
 
 function Account(){
 
     const[username,setUsername] = useState('')
     const[password,setPassword] = useState('')
+    const[valid,setValid]=useState(false)
     const handleClick=(e)=>{
       e.preventDefault()
       const admin ={username,password}
      // console.log(student)
-      fetch("http://localhost:8080/intouncommon/checkAdmin",{
+      fetch("https://into-uncommon.herokuapp.com/intouncommon/checkAdmin",{
         method:"POST",
         headers:{"header":localStorage.getItem("user")},
         body:JSON.stringify(admin)
@@ -19,32 +20,48 @@ function Account(){
         console.log(result)
         var error = "Error username or password"
         if(error==result){
-            window.location="http://localhost:3000"
+            window.location="/"
         }
         else{
             localStorage.setItem("key","ok")
-          window.location="http://localhost:3000/accountManage"
+          window.location="/accountManage"
          
         }
       })
     }
 
-    
+    useEffect(()=>{
+      if(!valid){
+        console.log(valid)
+        fetch("https://into-uncommon.herokuapp.com/intouncommon/getvalidity",{
+          headers:{"header":localStorage.getItem("user")}
+        })
+        .then(res=>res.text())
+        .then((result)=>{
+          console.log(result)
+          if(result==="successful"){
+            setValid(true)
+          }
+        })
+      }
+    },[])
 
     return(
-        <div class="frame">
-            <form>
-                <input label="Username" varient="Outlined" fullWidth
-    value={username}
-    onChange={(e)=>setUsername(e.target.value)}>
-                </input><br></br>
-                <input label="Password" varient="Outlined" fullWidth
-    value={password}
-    onChange={(e)=>setPassword(e.target.value)}>
-                </input>
-            </form>
-            <button variant='contained' color = "secondary" onClick={handleClick}>Submit</button>
-            <p id="id1"></p>
+        <div>
+          {valid?<div class="frame">
+        <form>
+            <input label="Username" varient="Outlined" fullWidth
+value={username}
+onChange={(e)=>setUsername(e.target.value)}>
+            </input><br></br>
+            <input label="Password" varient="Outlined" fullWidth
+value={password}
+onChange={(e)=>setPassword(e.target.value)}>
+            </input>
+        </form>
+        <button variant='contained' color = "secondary" onClick={handleClick}>Submit</button>
+        <p id="id1"></p>
+    </div>:<div><h2>Log In First</h2></div>}
         </div>
     )
 }

@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
-import Image1 from './Images/add.jpg';
-import Image2 from './Images/add2.png';
-import Image3 from './Images/add3.png';
-import Image4 from './Images/add4.png';
-import Image5 from './Images/add5.png';
-import Image6 from './Images/add6.png';
+import Image1 from './Images/image01.png';
+import Image2 from './Images/image02.png';
+import Image3 from './Images/image03.png';
+import Image4 from './Images/image04.png';
+import Image5 from './Images/image05.png';
+import Image6 from './Images/image06.png';
+import Image7 from './Images/image07.png';
+import Image8 from './Images/image08.png';
+import Image9 from './Images/image09.png';
+import Image10 from './Images/image10.png';
+
 import './Home.css';
 
 function ImageContainer(){
     const [mseconds,setmSeconds] = useState(0)
     const [seconds,setSeconds] = useState(0)
-    const images = [Image1,Image1,Image2,Image3,Image4,Image5,Image6,Image6]
+    const images = [Image1,Image1,Image2,Image3,Image4,Image5,Image6,Image7,Image8,Image9,Image10,Image10]
     
    if(localStorage.getItem("i")==images.length){
        localStorage.removeItem("i")
@@ -36,8 +41,8 @@ function ImageContainer(){
                 var index = localStorage.getItem("i")
             var i = parseInt(index)
             var x = document.getElementsByClassName("adHolder")
-        console.log("i= "+localStorage.getItem("i"))
-        console.log("side= "+localStorage.getItem("side"))
+       // console.log("i= "+localStorage.getItem("i"))
+       // console.log("side= "+localStorage.getItem("side"))
         //console.log(x[0])
         //x[1].style.opacity=1
         
@@ -46,14 +51,14 @@ function ImageContainer(){
             x[i].classList.add("moveLeftCurrentSlide")
             i=i+1
             if(i==images.length){
-                console.log(images.length)
+               // console.log(images.length)
                 i=i-2
                 localStorage.setItem("side","minus")
                 for(var j=0; j<x.length; j++){
                     x[j].className="adHolder";
                     x[j].style.opacity=1;
                 }
-                x[7].style.opacity=0;
+                x[11].style.opacity=0;
             }
         }
         else{
@@ -103,6 +108,18 @@ function ImageContainer(){
                 </div>
                 <div className="adHolder" id="add">
                  <img class='image' src={images[7]}/>
+                </div>
+                <div className="adHolder" id="add">
+                 <img class='image' src={images[8]}/>
+                </div>
+                <div className="adHolder" id="add">
+                 <img class='image' src={images[9]}/>
+                </div>
+                <div className="adHolder" id="add">
+                 <img class='image' src={images[10]}/>
+                </div>
+                <div className="adHolder" id="add">
+                 <img class='image' src={images[11]}/>
                 </div>
         </div>
     )

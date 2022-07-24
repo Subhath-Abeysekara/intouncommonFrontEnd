@@ -51,10 +51,9 @@
 }
 .borderBottom{
     position: absolute;
-    height: 2px;
+    height: 0.4%;
     width: 100%;
     background: black;
-    bottom: 0;
 }
 .header{
     position: absolute;
@@ -72,27 +71,27 @@
 }
 .product{
     position: relative;
-    width: 95%;
-    height: 740px;
+    width: 100%;
+    height: 120vh;
     background: rgb(231, 229, 229);
     left: 2%;
 }
 
-.imageHolder{
+.imageHolderProduct{
     position: absolute;
-    width: 350px;
-    height: 400px;
+    width: 30%;
+    height: 52%;
     background: white;
-    left: 2px;
-    top: 2px;
+    left: 0.15%;
+    top: 0.15%;
 }
 .leftHandler{
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: 3%;
+    height: 2%;
     left: 0;
-    top: 175px;
-    border: 10px solid black;
+    top: 48%;
+    border: 3% solid black;
     border-top: none;
     border-left: none;
     transform: rotate(135deg);
@@ -106,11 +105,11 @@
 .rightHandler{
     position: absolute;
     display: block;
-    width: 0px;
-    height: 0px;
-    border:15px solid transparent;
+    width:0;
+    height: 0;
+    border:10px solid transparent;
     border-right-color: #ccc;
-    border-left-width: 0px;
+    border-left-width: 0;
     transform: rotate(180deg);
     transition: background 0.5s;
 }
@@ -122,242 +121,258 @@
     position: absolute;
     top: 0;
     right: 17%;
+    font-size: 1.2vw;
 
 }
 
 .productid{
     position: absolute;
-    top: 105px;
+    top: 13.8%;
     left: 60%;
+    font-size: 1.2vw;
 }
 .productName{
     position: absolute;
-    top: 55px;
+    top: 8%;
     left: 60%;
-    font-size: 30px;
+    font-size: 2vw;
     text-transform: uppercase;
 }
 .type{
     position: absolute;
-    top: 125px;
+    top: 17%;
     left: 60%;
+    font-size: 1.3vw;
 }
 .size{
     position: absolute;
-    top: 200px;
+    top: 27%;
     left: 45%;
+    font-size: 1.2vw;
 }
 .metiriar{
     position: absolute;
-    top: 230px;
+    top: 31%;
     left: 45%;
+    font-size: 1.2vw;
 }
 .color{
     position: absolute;
-    top: 260px;
+    top: 35%;
     left: 45%;
+    font-size: 1.2vw;
 }
 .option{
     position: absolute;
-    top: 290px;
+    top: 39%;
     left: 45%;
+    font-size: 1.2vw;
 }
 .usage{
     position: absolute;
-    top: 350px;
+    top: 47%;
     left: 45%;
     color: rgb(221, 160, 27);
-    font-size: 18px;
+    font-size: 1.3vw;
 }
 .specialUse{
-    top: 400px;
+    top: 52%;
+    font-size: 1.2vw;
 }
 .price{
     position: absolute;
-    top: 450px;
+    top: 61%;
     left: 45%;
+    font-size: 1.25vw;
 }
 .warranty{
     position: absolute;
-    top: 470px;
+    top: 64%;
     left: 45%;
+    font-size: 1.25vw;
 }
 .delivery{
     position: absolute;
-    top: 490px;
+    top: 67%;
     left: 45%;
+    font-size: 1.25vw;
 }
 .special{
     position: absolute;
-    top: 550px;
+    top: 75%;
     left: 50%;
     width: 30%;
-    height: 100px;
+    height: 13%;
     background: white;
     padding: 0 0 0 1%;
+    font-size: 1vw;
 }
 .colorSymble{
     position: absolute;
-    width: 25px;
-    height: 25px;
+    width: 1.5%;
+    height: 2.7%;
     border-radius: 100%;
-    background: rgb(153, 1, 1);
+    background: rgb(8, 199, 8);
 }
 .symble1{
-    left: 10px;
-    top: 465px;
+    left: 1%;
+    top: 61.8%;
     
 }
 .symble2{
-    left: 10px;
-    top: 495px;
+    left: 1%;
+    top: 65.8%;
 }
 .symble3{
-    left: 10px;
-    top: 525px;
+    left: 1%;
+    top: 69.8%;
 }
 .symble4{
-    left: 10px;
-    top: 555px;
+    left: 1%;
+    top: 73.8%;
 }
 .benifit{
     position: absolute;
-    top: 405px;
-    left: 50px;
+    top: 54%;
+    left: 4%;
+    font-size: 1vw;
 }
 .repay{
-    top: 450px;
+    top: 60.5%;
     color: red;
 
 }
 .change{
-    top: 480px;
+    top: 64.5%;
     color: red;
 
 }
 .afterwarrnty{
-    top: 510px;
+    top: 68.5%;
     color: red;
 
 }
 .discount{
-    top: 540px;
+    top: 72.5%;
     color: red;
 
 }
 .warantyfiread{
     position: absolute;
     color: black;
-    font-size: 12px;
-    left: 205px;
-    top: 518px;
+    font-size: 0.8vw;
+    left: 16%;
+    top: 69.5%;
 }
 .after{
     position: absolute;
     color: black;
-    font-size: 12px;
-    left: 125px;
-    top: 548px;
+    font-size: 0.8vw;
+    left: 10%;
+    top: 73.5%;
 }
 .half{
     position: absolute;
     color: red;
-    font-size: 12px;
-    left: 205px;
-    top: 548px;
+    font-size: 0.8vw;
+    left: 16%;
+    top: 73.5%;
 }
 .contact{
     position: absolute;
-    top: 600px;
-    left: 10px;
+    top: 80%;
+    left: 4%;
+    font-size: 1vw;
 }
 .msg{
     position: absolute;
-    top: 620px;
-    left: 10px;
+    top: 82.5%;
+    left: 4%;
     color: rgb(245, 61, 61);
-    font-size: 14px;
+    font-size: 1vw;
 }
 .name{
-    top: 450px;
-    left: 10px;
+    top: 60%;
+    left: 1%;
+    font-size: 1.2vw;
 }
 .address{
-    top: 480px;
-    left: 10px;
+    top: 64%;
+    left: 1%;
+    font-size: 1.2vw;
 }
 .blackSymble{
     position: absolute;
-    height: 90px;
-    width: 2px;
+    height: 12%;
+    width: 0.15%;
     background: black;
     top: 31%;
     left: 44%;
 }
 
 .borderBottom2{
-    bottom: 70px;
+    bottom: 9%;
 }
 .madein{
     position: absolute;
-    bottom: 10px;
-    left: 50px;
-    font-size: 15px;
+    bottom: 1.29%;
+    left: 4%;
+    font-size: 1.2vw;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .design{
     position: absolute;
-    bottom: 10px;
-    left: 300px;
-    font-size: 15px;
+    bottom: 1.29%;
+    left: 24%;
+    font-size: 1.2vw;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .quality{
     position: absolute;
-    bottom: 10px;
-    left: 600px;
-    font-size: 15px;
+    bottom: 1.29%;
+    left: 48%;
+    font-size: 1.2vw;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .inventor{
     position: absolute;
-    bottom: 10px;
-    left: 900px;
-    font-size: 15px;
+    bottom: 1.29%;
+    left: 72%;
+    font-size: 1.2vw;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .colorBox{
     position: absolute;
-    width: 25px;
-    height: 25px;
+    width: 2%;
+    height: 3.5%;
     border-radius: 30%;
     background: black;
-    bottom: 22px;
+    bottom: 3%;
 }
 .box1{
     
-    left: 10px;
+    left: 1%;
 }
 .box2{
     
-    left: 260px;
+    left: 21%;
 }
 .box3{
     
-    left: 560px;
+    left: 45%;
 }
 
 .box4{
     
-    left: 860px;
+    left: 69%;
 }
 
 .ball{
     position: absolute;
-    width: 19px;
-    height: 19px;
+    width: 75%;
+    height: 75%;
     border-radius: 50%;
     background: rgb(238, 137, 5);
-    top: 3px;
-    left: 3px;
+    top: 12.5%;
+    left: 12.5%;
 }

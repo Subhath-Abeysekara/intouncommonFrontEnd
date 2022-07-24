@@ -4,12 +4,12 @@ import {ref , listAll, getDownloadURL} from "firebase/storage"
 import {storage} from "./Firebase"
 import  Home from "./Home"
 import ImageContainer from "./ImageContainer";
-import Image1 from './Images/add.jpg';
-import Image2 from './Images/add2.png';
-import Image3 from './Images/add3.png';
-import Image4 from './Images/add4.png';
-import Image5 from './Images/add5.png';
-import Image6 from './Images/add6.png';
+import Image1 from './Images/image01.png';
+import Image2 from './Images/image02.png';
+import Image3 from './Images/image03.png';
+import Image4 from './Images/image04.png';
+import Image5 from './Images/image05.png';
+import Image6 from './Images/image06.png';
 import "./Common.css"
 
 function CommonProducts(){

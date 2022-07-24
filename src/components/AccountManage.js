@@ -10,12 +10,13 @@ function AccountManage(){
     const[oldPassword,setOldPassword] = useState('')
     const[oldadmin,setOldadmin] = useState('')
     const[admin,setadmin] = useState('')
+    const[valid,setValid]=useState(false)
     const addAdmin=(e)=>{
         const admin ={username,password}
      // console.log(student)
-      fetch("http://localhost:8080/intouncommon/addAdmin",{
+      fetch("https://into-uncommon.herokuapp.com/intouncommon/addAdmin",{
         method:"POST",
-        headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*"},
+        headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
         body:JSON.stringify(admin)
       })
       .then(res=>res.text())
@@ -23,11 +24,11 @@ function AccountManage(){
         console.log(result)
         var error = "Error username or password"
         if(error==result){
-            window.location="http://localhost:3000"
+            window.location="/"
         }
         else{
             alert(result)
-          window.location="http://localhost:3000/accountManage"
+          window.location="/accountManage"
          
         }
       })
@@ -36,7 +37,7 @@ function AccountManage(){
     const changeAdmin=(e)=>{
         const oldadmin ={username,password,oldUsername,oldPassword}
 
-        fetch("http://localhost:8080/intouncommon/changeAdmin",{
+        fetch("https://into-uncommon.herokuapp.com/intouncommon/changeAdmin",{
         method:"PUT",
         headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
         body:JSON.stringify(oldadmin)
@@ -51,13 +52,26 @@ function AccountManage(){
         }
         else{
           alert("successfully changed")
-          window.location="http://localhost:3000/login"
+          window.location="/login"
         }
       })
     }
     useEffect(()=>{
+      if(!valid){
+        console.log(valid)
+        fetch("https://into-uncommon.herokuapp.com/intouncommon/getvalidity",{
+          headers:{"header":localStorage.getItem("user")}
+        })
+        .then(res=>res.text())
+        .then((result)=>{
+          console.log(result)
+          if(result==="successful"){
+            setValid(true)
+          }
+        })
+      }
         if(localStorage.getItem("key")==null){
-            window.location="http://localhost:3000"
+            window.location="/"
         }
         else{
             localStorage.removeItem("key")
@@ -65,7 +79,8 @@ function AccountManage(){
       },[])
 
     return(
-        <div class="frame">
+        <div>
+          {valid?<div class="frame">
             <div class="add">
             <h1>Add New Admin</h1>
             <form>
@@ -107,6 +122,7 @@ function AccountManage(){
             <button variant='contained' color = "secondary" onClick={changeAdmin}>Submit</button>
             <p id="id1"></p>
             </div>
+        </div>:<div><h2>Log In First</h2></div>}
         </div>
     )
 }

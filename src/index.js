@@ -22,10 +22,12 @@ import Updateuncommon from './components/Updateuncommon';
 import Updatecommon from './components/Updatecommon';
 import ProductImages from './components/ProductImages';
 import CommonProduct2 from './components/CommonProduct2';
+import CreateBy from './components/CreateBy';
 import { fetchCommon } from './redux/commonSlice';
 import store from './redux/store/store'
 import { Provider } from 'react-redux';
 import UncommonProduct2 from './components/UncommonProduct2';
+import Test from './components/Test';
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -35,10 +37,12 @@ root.render(
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/common/:pid' element={<CommonProducts/>}/>
-      <Route path='/common2/:pid' element={<CommonProduct2/>}/>
+      <Route path='/createBy' element={<CreateBy/>}/>
+      <Route path='/common2' element={<CommonProduct2/>}/>
       <Route path='/uncommon/:pid' element={<UncommonProduct/>}/>
-      <Route path='/uncommon2/:pid' element={<UncommonProduct2/>}/>
-      <Route path='/project/:pid' element={<UncommonProject/>}/>
+      <Route path='/uncommon2' element={<UncommonProduct2/>}/>
+      <Route path='/test/:pid' element={<Test/>}/>
+      <Route path='/project' element={<UncommonProject/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/category' element={<Category/>}/>
       <Route path='/product' element={<Product/>}/>

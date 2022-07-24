@@ -13,7 +13,6 @@
     height: 2px;
     width: 100%;
     background: black;
-    bottom: 0;
 }
 .header{
     position: absolute;
@@ -31,8 +30,8 @@
 }
 .product{
     position: relative;
-    width: 700px;
-    height: 740px;
+    width: 95%;
+    height: 86vh;
     background: rgb(231, 229, 229);
     left: 2%;
     margin-bottom: 2%;
@@ -161,17 +160,18 @@
 }
 .redSymble{
     position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 2%;
+    height: 3.5%;
     border-radius: 100%;
     background: rgb(153, 1, 1);
-    left: 10px;
-    top: 420px;
+    left: 1%;
+    top: 56.5%;
 }
 .productor{
     position: absolute;
-    top: 405px;
-    left: 50px;
+    top: 54.5%;
+    left: 4%;
+    font-size: 1.2vw;
 }
 .contact{
     position: absolute;

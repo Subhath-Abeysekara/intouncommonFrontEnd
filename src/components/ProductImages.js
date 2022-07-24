@@ -8,13 +8,15 @@ function ProductImages(){
     const[imageList,setImageList] = useState([])
     const[urls,setUrls] = useState([])
     const[id,setId] = useState(localStorage.getItem("id"))
+    const[valid,setValid]=useState(false)
 
     const enterId=(e)=>{
-        fetch("http://localhost:8080/intouncommon/getproducts",{
+        fetch("https://into-uncommon.herokuapp.com/intouncommon/getproducts",{
             headers:{"header":localStorage.getItem("user")}
           })
           .then(res=>res.json())
           .then((result)=>{
+            console.log(result)
           var i =0
           for(i=0;i<result.length;i++){
               if(result[i].id=id){
@@ -37,7 +39,7 @@ function ProductImages(){
             if(imageUpload == null){
                 alert("image havent selected")
                 return}
-                fetch("http://localhost:8080/intouncommon/getAmount?id="+localStorage.getItem("id"),{
+                fetch("https://into-uncommon.herokuapp.com/intouncommon/getAmount?id="+localStorage.getItem("id"),{
         headers:{"header":localStorage.getItem("user")}
       })
       .then(res=>res.json())
@@ -49,9 +51,9 @@ function ProductImages(){
                 console.log(url)
                 const productImages = {url}
                 const productImageDTO = {productId : id , productImages}
-                fetch("http://localhost:8080/intouncommon/product/url/add",{
+                fetch("https://into-uncommon.herokuapp.com/intouncommon/product/url/add",{
               method:"POST",
-              headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*"},
+              headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
               body : JSON.stringify(productImageDTO)
             })
             .then(res=>res.text())
@@ -64,9 +66,9 @@ function ProductImages(){
                 }
             })
         })
-        fetch("http://localhost:8080/intouncommon/addAmount?id="+localStorage.getItem("id")+"&"+"amount="+result+1,{
+        fetch("https://into-uncommon.herokuapp.com/intouncommon/addAmount?id="+localStorage.getItem("id")+"&"+"amount="+result+1,{
               method:"PUT",
-              headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*"},
+              headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
             })
             .then(res=>res.text())
             .then((result2)=>{})
@@ -76,23 +78,42 @@ function ProductImages(){
     }
 }
 
-    useEffect(()=>{
-        fetch("http://localhost:8080/intouncommon/getproducts",{
-            headers:{"header":localStorage.getItem("user")}
-          })
-          .then(res=>res.json())
-          .then((result)=>{
-          var string="<h3 style='color:red;'>Available Products</h3><ul>"
-          var frame = document.getElementById("showing")
-          var i =0
-          for(i=0;i<result.length;i++){
-            string+="<li><p>ID : "+result[i].id+"<br></br>PRODUCT : "+result[i].category.type+"<br></br>COMMON : "+result[i].category.common+"<br></br>USES : "+result[i].uses+"<br></br>SPECIAL DETAILS : "+result[i].specialData+"<br></br>PRIMARY DETAILS : "+result[i].primaryData+"<br></br>PRODUCER : "+result[i].producer.name+"<br></br>STATE CODE : "+result[i].statecodes.state_type+"</p></li>"
-        }
-        string+="</ul>"
-        frame.innerHTML = string
-             
-    })
+function showProducts(){
+    fetch("https://into-uncommon.herokuapp.com/intouncommon/getproducts",{
+          headers:{"header":localStorage.getItem("user")}
+        })
+        .then(res=>res.json())
+        .then((result)=>{
+          alert(result)
+          console.log(result[0])
+        var string="<h3 style='color:red;'>Available Products</h3><ul>"
+        console.log(string)
+        var frame = document.getElementById("showing")
+        var i =0
+        for(i=0;i<result.length;i++){
+          if(result[i].amount===0){
+            string+="<li><p>ID : "+result[i].id+"<br></br>Uses : "+result[i].uses+"<br></br>Brand : "+result[i].brand+"<br></br>Size : "+result[i].size+"<br></br>Color : "+result[i].color+"<br></br>Material : "+result[i].material+"<br></br>Price : "+result[i].price+"<br></br>Options : "+result[i].options+"<br></br>Waranty : "+result[i].warranty+"<br></br>delivery : "+result[i].delivery+"<br></br>Special Usage : "+result[i].specialUsage+"<br></br>madeIn : "+result[i].madeIn+"<br></br>designBy : "+result[i].designBy+"<br></br>qualityOf : "+result[i].qualityOf
+            if(result[i].category!=null){
+              string+="<br></br>Product Material : "+result[i].category.material+"<br></br>Product Type : "+result[i].category.type+"<br></br>Common : "+result[i].category.common
+            }
+            if(result[i].producer!=null){
+              string+="<br></br>Producer Name : "+result[i].producer.name+"<br></br>Producer Id : "+result[i].producer.producerId+"<br></br>Producer Basic : "+result[i].producer.basicDetails
+            }
+            if(result[i].statecodes!=null){
+              string+="<br></br>State Code : "+result[i].statecodes.state_type+"<br></br>Repay : "+result[i].statecodes.repayColor+"<br></br>Change : "+result[i].statecodes.changeColor+"<br></br>Warranty : "+result[i].statecodes.warrantyColor+"<br></br>Discount : "+result[i].statecodes.discountColor
+            }
+            string+="</p></li>"
+          }
+         
+      }
+      string+="</ul>"
+      console.log(string)
+      frame.innerHTML = string
+           
+  })
+}
 
+function showImages(){
     if(localStorage.getItem("id")==null){
 
     }
@@ -107,9 +128,31 @@ function ProductImages(){
             })
         })
     }
+}
+    useEffect(()=>{
+        if(!valid){
+            console.log(valid)
+            fetch("https://into-uncommon.herokuapp.com/intouncommon/getvalidity",{
+              headers:{"header":localStorage.getItem("user")}
+            })
+            .then(res=>res.text())
+            .then((result)=>{
+              console.log(result)
+              if(result==="successful"){
+                setValid(true)
+              }
+            })
+          }
+        
+   
     } , [])
     return(
-        <div style={{textAlign:"center"}}><h2 style={{color: "purple"}}><u>Image Uploader</u></h2>
+        <div>
+            {valid?<div style={{textAlign:"center"}}><h2 style={{color: "purple"}}><u>Image Uploader</u></h2>
+            <div style={{textAlign:"left" , top:0}}>
+            <button onClick={showProducts}>SHOW PRODUCTS</button><br></br>
+            <button onClick={showImages}>SHOW IMAGES</button>
+           </div>
         <div class="getid"  style={{textAlign:"center"}}>
       <h3 style={{color: "red"}}>Enter Id</h3>
         <form>
@@ -118,9 +161,10 @@ function ProductImages(){
           value={id}
           onChange={(e)=>setId(e.target.value)}>
           </input><br></br>
-          <button style={{color: "white",background:"black"}}  variant='contained' color = 'secondary' onClick={enterId}>ENTER</button>
+         
        <br></br>
         </form>
+        <button style={{color: "white",background:"black"}}  variant='contained' color = 'secondary' onClick={enterId}>ENTER</button>
       </div>
       <br></br>
             <div style={{textAlign:"center"}}>
@@ -134,6 +178,7 @@ function ProductImages(){
                 })}
             </div>
             <div id="showing"></div>
+        </div>:<div><h2>Log In First</h2></div>}
         </div>
     )
 }

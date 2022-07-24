@@ -2,31 +2,21 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import Image1 from './Images/add.jpg';
-import Image2 from './Images/add2.png';
-import Image3 from './Images/add3.png';
-import Image4 from './Images/add4.png';
-import Image5 from './Images/add5.png';
-import Image6 from './Images/add6.png';
+
 
 function CommonProduct2(){
-        const {pid} = useParams();
+    
+
+    const [pid , setPid] = useState(localStorage.getItem("catId"));
+        localStorage.removeItem("catId")
         const {common} = useSelector((state)=>state.common);
-        const images = [Image1,Image1,Image2,Image3,Image4,Image5,Image6,Image6]
+        
         const [sizeIndex,setIndex]= useState(0)
         console.log(common.length)
 
         console.log(pid)
-        var stringid = ""
-    for(var i=0;i<pid.length-1;i++){
-        if(pid[i]==':'){
-            for(var i=0;i<pid.length-1;i++){
-            
-                    stringid+=pid[i+1];
-            }
-            break
-        }
-    }
+        var stringid = pid
+    
     console.log(stringid)
         const products = common.filter(({ category }) => {
             return category !== null;
@@ -73,11 +63,15 @@ function CommonProduct2(){
           }
     return(
         <div>
+            {common.length===0&&<div>
+                <h2 style={{color: "rgb(109, 108, 108)" , fontSize:"2vw"}}>Loading</h2>
+                <p style={{color: "rgb(109, 108, 108)" , fontSize:"0.8vw"}}>or no valid products for this product</p>
+                </div>}
             {common.length!== 0 && productss.map((product)=>(
                 
                 <div class='product'>
                 <div>
-                    <div className="imageHolder">
+                    <div className="imageHolderProduct">
                         {product.productImages.map((image)=>(
                             <div >
                                 <img className="image" id={image.id} src={image.url} />
@@ -106,8 +100,8 @@ function CommonProduct2(){
                 <p class='contact'>FOR MORE INFORMATIONS   <b>+94 765 233 983</b></p>
                 <p class='msg'><u>Not Online Buy facility Now</u></p>
                 <div class='special'><p>product for date 7</p></div>
-                <div class='borderBottom borderBottom2'></div>
-                </div>
+                
+                </div> 
                 
             ))
             }

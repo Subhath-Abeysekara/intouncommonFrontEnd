@@ -10,7 +10,7 @@ function Login(){
     const admin ={username,password}
     var position = document.getElementById("id1")
    // console.log(student)
-    fetch("http://localhost:8080/intouncommon/getKey",{
+    fetch("https://into-uncommon.herokuapp.com/intouncommon/getKey",{
       method:"POST",
       headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*"},
       body:JSON.stringify(admin)
@@ -21,15 +21,16 @@ function Login(){
       var error = "Error username or password"
       if(error==result){
         position.innerHTML = result
+        alert(result)
       }
       else{
         localStorage.setItem("user",result)
-        window.location="http://localhost:3000/category"
+        window.location="/category"
       }
     })
   }
   useEffect(()=>{
-    fetch("http://localhost:8080/intouncommon/get/category/ids?common=true",{
+    fetch("https://into-uncommon.herokuapp.com/intouncommon/get/category/ids?common=true",{
       headers:{"header":"subhath"}
     })
     .then(res=>res.text())
@@ -39,19 +40,19 @@ function Login(){
   },[])
 
     return(
-        <div class="frame">
+        <div class="frame" style={{textAlign:"center"}}>
             <form>
                 <input label="Username" varient="Outlined" fullWidth
     value={username}
     onChange={(e)=>setUsername(e.target.value)}>
                 </input><br></br>
-                <input label="Password" varient="Outlined" fullWidth
+                <input label="Password" varient="Outlined" fullWidth type={"password"}
     value={password}
     onChange={(e)=>setPassword(e.target.value)}>
                 </input>
             </form>
             <button variant='contained' color = "secondary" onClick={handleClick}>Submit</button>
-            <p id="id1"></p>
+            <p id="id1" style={{color:"red"}}></p>
         </div>
         
     );

@@ -1,0 +1,56 @@
+.frame{
+    position: relative;
+    width : 100vw;
+    height : auto;
+    background: black;
+}
+.projectHolder{
+    position: absolute;
+    width: 100%;
+    height: 45vw;
+    background: black;
+}
+.projectImageHolder{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.project1{
+    position: absolute;
+    width: 100%;
+    height: 335vw;
+    background: black;
+}
+
+.project2{
+    position: absolute;
+    width: 100%;
+    height: 201vw;
+    background: black;
+}
+
+.imageHolder{
+    position: absolute;
+    width: 50%;
+    height: 65vw;
+    left:25%;
+}
+
+.imageHolder1{
+    top: 0;
+}
+
+.imageHolder2{
+    top: 67vw;
+}
+.imageHolder3{
+    top: 134vw;
+}
+.imageHolder4{
+    top: 201vw;
+}
+
+.imageHolder5{
+    top: 268vw;
+}

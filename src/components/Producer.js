@@ -11,11 +11,12 @@ function Producer(){
     const[catCount,setCatCount] = useState(localStorage.getItem("catcount"))
     const[producerCategories,setProducerCategories]=useState(JSON.parse(localStorage.getItem("categories")))
     const[producer,setProducer] = useState([])
+    const[valid,setValid]=useState(false)
 
     const addProducer=(e)=>{
       if(localStorage.getItem("catcount")==null){
         alert("You should enter the category Count first")
-        window.location="http://localhost:3000/producer"
+        window.location="/producer"
       }
       else{
         if(localStorage.getItem("presentCount")>localStorage.getItem("catcount")){
@@ -30,9 +31,9 @@ function Producer(){
 
           const producer = {name,basicDetails,nicNo,producerCategories}
         console.log(producer)
-        fetch("http://localhost:8080/intouncommon/producer/add",{
+        fetch("https://into-uncommon.herokuapp.com/intouncommon/producer/add",{
             method:"POST",
-            headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*"},
+            headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
             body:JSON.stringify(producer)
           })
           .then(res=>res.text())
@@ -40,16 +41,16 @@ function Producer(){
             console.log(result)
             var error = "Error username or password"
             if(result==error){
-              window.location="http://localhost:3000"
+              window.location="/"
             }
           else{
-            window.location="http://localhost:3000/producer"
+            window.location="/producer"
           }
           })
         }
         else{
           alert("Enter All Categories or Enter Category Count again Clearly")
-          window.location="http://localhost:3000/producer"
+          window.location="/producer"
         }
       }
         
@@ -66,10 +67,10 @@ function Producer(){
               localStorage.removeItem("catId")
               localStorage.removeItem("updateCondition")
               alert("cant delete u have given update id")
-              window.location="http://localhost:3000/producer"
+              window.location="/producer"
           }
           else{
-            fetch("http://localhost:8080/intouncommon/producer/delete?id="+producerId,{
+            fetch("https://into-uncommon.herokuapp.com/intouncommon/producer/delete?id="+producerId,{
             method:"DELETE",
             headers:{"header":localStorage.getItem("user")}
           })
@@ -78,10 +79,10 @@ function Producer(){
             var error = ""
             console.log(error)
         if(result==error){
-          window.location="http://localhost:3000"
+          window.location="/"
         }
       else{
-        window.location="http://localhost:3000/producer"
+        window.location="/producer"
       }        
     })
           }
@@ -112,12 +113,12 @@ function Producer(){
         const setCateories=(e)=>{
           if(localStorage.getItem("catcount")==null){
             alert("You should enter the category Count first")
-            window.location="http://localhost:3000/producer"
+            window.location="/producer"
           }
           else{
             if(parseInt(localStorage.getItem("presentCount"))>parseInt(localStorage.getItem("catcount"))){
               alert("All Categories are added.Now submit producer Details")
-              window.location="http://localhost:3000/producer"
+              window.location="/producer"
             }
             else{
               localStorage.setItem("catId"+localStorage.getItem("presentCount"),catId)
@@ -133,7 +134,7 @@ function Producer(){
                 localStorage.setItem("categories",JSON.stringify(objectArray))
                 alert("All Categories are added.Now submit producer Details")
               }
-              window.location="http://localhost:3000/producer"
+              window.location="/producer"
             }
           }
         }
@@ -149,16 +150,16 @@ function Producer(){
           localStorage.removeItem("producerId")
           localStorage.removeItem("updateCondition")
           localStorage.removeItem("producerCatString")
-          window.location="http://localhost:3000/producer"
+          window.location="/producer"
         }
-        const showCateories=(e)=>{
-          fetch("http://localhost:8080/intouncommon/getcategories",{
+        function showCateories(){
+          fetch("https://into-uncommon.herokuapp.com/intouncommon/getcategories",{
           headers:{"header":localStorage.getItem("user")}
         })
         .then(res=>res.json())
         .then((result)=>{
         var string="<h3 style='color:red;'>Available Categories</h3><ul>"
-        var frame = document.getElementById("showing")
+        var frame = document.getElementById("showingcat")
         var i =0
         for(i=0;i<result.length;i++){
           string+="<li><p>ID : "+result[i].categoryId+"<br></br>CATEGORY : "+result[i].type+"<br></br>COMMON : "+result[i].common+"</p></li>"
@@ -169,8 +170,27 @@ function Producer(){
       alert(string)
   })
         }
-        const updateProducer=(e)=>{
-          fetch("http://localhost:8080/intouncommon/getproducers",{
+
+        function showCats(){
+          fetch("https://into-uncommon.herokuapp.com/intouncommon/getcategories",{
+          headers:{"header":localStorage.getItem("user")}
+        })
+        .then(res=>res.json())
+        .then((result)=>{
+        var string="<h3 style='color:red;'>Available Categories</h3><ul>"
+        var frame = document.getElementById("showingcat")
+        var i =0
+        for(i=0;i<result.length;i++){
+          string+="<li><p>ID : "+result[i].categoryId+"<br></br>CATEGORY : "+result[i].type+"<br></br>COMMON : "+result[i].common+"</p></li>"
+      }
+      string+="</ul>"
+      frame.innerHTML = string
+           
+  })
+        }
+
+        function updateProducer(){
+          fetch("https://into-uncommon.herokuapp.com/intouncommon/getproducers",{
           headers:{"header":localStorage.getItem("user")}
         })
         .then(res=>res.json())
@@ -206,7 +226,7 @@ function Producer(){
         const changeProducer=(e)=>{
           if(localStorage.getItem("catcount")==null){
             alert("You should enter the category Count first")
-        window.location="http://localhost:3000/producer"
+        window.location="/producer"
           }
           else{
             if(parseInt(localStorage.getItem("presentCount"))>parseInt(localStorage.getItem("catcount"))){
@@ -215,9 +235,9 @@ function Producer(){
           console.log(producer)
           if(localStorage.getItem("updateCondition")=="yes"){
             localStorage.removeItem("updateCondition")
-            fetch("http://localhost:8080/intouncommon/producer/update?id="+localStorage.getItem("producerId"),{
+            fetch("https://into-uncommon.herokuapp.com/intouncommon/producer/update?id="+localStorage.getItem("producerId"),{
               method:"PUT",
-              headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*"},
+              headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
               body:JSON.stringify(producer)
             })
             .then(res=>res.text())
@@ -233,77 +253,99 @@ function Producer(){
               localStorage.removeItem("categories")
               localStorage.removeItem("presentCount")
               if(result==error){
-                window.location="http://localhost:3000"
+                window.location="/"
               }
             else{
-              window.location="http://localhost:3000/producer"
+              window.location="/producer"
             }
             })
           }
           else{
             alert("cant update without id")
-            window.location="http://localhost:3000/producer"
+            window.location="/producer"
           }
             }
             else{
               alert("Enter All Categories or Enter Category Count again Clearly")
-          window.location="http://localhost:3000/producer"
+          window.location="/producer"
             }
           }
         }
 
+        function showProducers(){
+          console.log(localStorage.getItem("user"))
+          fetch("https://into-uncommon.herokuapp.com/intouncommon/getproducers",{
+            headers:{"header":localStorage.getItem("user")}
+          })
+          .then(res=>res.json())
+          .then((result)=>{
+          var string="<h3 style='color:red;'>Available Producers</h3><ul>"
+          var frame = document.getElementById("showing")
+          var i =0
+          for(i=0;i<result.length;i++){
+            string+="<li><p>ProducerID : "+result[i].producerId+"<br></br>Nic No : "+result[i].nicNo+"<br></br>ProducerName : "+result[i].name+"<br></br>BasicDetails : "+result[i].basicDetails
+            string+="<ul>"
+            var j=0
+            for(j=0;j<result[i].producerCategories.length;j++){
+              string+="<li><p>CATEGORY ID : "+result[i].producerCategories[j].catId+"</p></li>"
+          }
+          string+="</ul></p></li>"
+        }
+        string+="</ul>"
+        console.log(string)
+        frame.innerHTML = string
+             
+    })
+        }
     useEffect(()=>{
-      console.log(localStorage.getItem("user"))
-        fetch("http://localhost:8080/intouncommon/getproducers",{
+      if(!valid){
+        console.log(valid)
+        fetch("https://into-uncommon.herokuapp.com/intouncommon/getvalidity",{
           headers:{"header":localStorage.getItem("user")}
         })
-        .then(res=>res.json())
+        .then(res=>res.text())
         .then((result)=>{
-        var string="<h3 style='color:red;'>Available Producers</h3><ul>"
-        var frame = document.getElementById("showing")
-        var i =0
-        for(i=0;i<result.length;i++){
-          string+="<li><p>ProducerID : "+result[i].producerId+"<br></br>Nic No : "+result[i].nicNo+"<br></br>ProducerName : "+result[i].name+"<br></br>BasicDetails : "+result[i].basicDetails
-          string+="<ul>"
-          var j=0
-          for(j=0;j<result[i].producerCategories.length;j++){
-            string+="<li><p>CATEGORY ID : "+result[i].producerCategories[j].catId+"</p></li>"
-        }
-        string+="</ul></p></li>"
+          console.log(result)
+          if(result==="successful"){
+            setValid(true)
+          }
+        })
       }
-      string+="</ul>"
-      console.log(string)
-      frame.innerHTML = string
-           
-  })
-      if(localStorage.getItem("catString")==null){
+      
+      // if(localStorage.getItem("catString")==null){
         
-      }
-      else{
-        var frame = document.getElementById("showingcat")
-        frame.innerHTML = localStorage.getItem("catString");
-        localStorage.removeItem("catString")
-      }
-      if(localStorage.getItem("producerCatString")==null){
+      // }
+      // else{
+      //   var frame = document.getElementById("showingcat")
+      //   frame.innerHTML = localStorage.getItem("catString");
+      //   localStorage.removeItem("catString")
+      // }
+      // if(localStorage.getItem("producerCatString")==null){
         
-      }
-      else{
-        var frame = document.getElementById("catShowing")
-        frame.innerHTML = localStorage.getItem("producerCatString");
-        localStorage.removeItem("producerCatString")
-      }
+      // }
+      // else{
+      //   var frame = document.getElementById("catShowing")
+      //   frame.innerHTML = localStorage.getItem("producerCatString");
+      //   localStorage.removeItem("producerCatString")
+      // }
       },[])
 
 
 
 
     return(
-        <div>
+       <div>
+        {valid? <div>
         <div class="links" style={{textAlign:"left"}}>
         <a href="/category"><p style={{color: "green"}}><b>BACK</b></p></a>
         <br></br>
         <button style={{color: "white",background:"black"}} variant='contained' color = 'secondary' onClick={reEnter}>Refres All</button>
         </div>
+        <div style={{textAlign:"left" , top:0}}>
+            
+            <button onClick={showProducers}>SHOW PRODUCERS</button><br></br>
+            <button onClick={showCats}>SHOW CATEGORIES</button>
+           </div>
       <div id="adding" style={{textAlign:"center"}}>
      
         <h1 style={{textAlign:"center",color:"purple"}}><u>Producers</u></h1>
@@ -334,7 +376,7 @@ value={catCount}
 onChange={(e)=>setCatCount(e.target.value)}>
           </input><br></br>
 <button style={{color: "white",background:"black"}} variant='contained' color = 'secondary' onClick={getCatCount}>Submit Category Amount</button>
-<br></br><button style={{color: "white",background:"black"}} variant='contained' color = 'secondary' onClick={showCateories}>Show Categories</button>
+
          <br></br><label style={{color: "blue"}}>Cat Id</label><br></br>
           <input label="contact" varient="Outlined" fullWidth placeholder="Contact"
 value={catId}
@@ -383,7 +425,7 @@ value={catCount}
 onChange={(e)=>setCatCount(e.target.value)}>
           </input><br></br>
 <button style={{color: "white",background:"black"}} variant='contained' color = 'secondary' onClick={getCatCount}>Submit Category Amount</button>
-<br></br><button style={{color: "white",background:"black"}} variant='contained' color = 'secondary' onClick={showCateories}>Show Categories</button>
+
          <br></br><label style={{color: "blue"}}>Cat Id</label><br></br>
           <input label="contact" varient="Outlined" fullWidth placeholder="Contact"
 value={catId}
@@ -412,7 +454,8 @@ onChange={(e)=>setCatId(e.target.value)}>
       <div class="shawing" id="showing" >
       
       </div>
-  </div>
+  </div>:<div><h2>Log In First</h2></div>}
+       </div>
     )
 }
 

@@ -10,10 +10,10 @@ export const fetchCommon = createAsyncThunk(
       const response = await intouncommonApi.get("/getproducts",{
         headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*"}
       });
-      console.log(response.data)
+      console.log("respons"+response.data)
       return response.data;
     } catch (error) {
-      console.log(error.response.body);
+      console.log("error"+error.response.body);
     }
   }
 );

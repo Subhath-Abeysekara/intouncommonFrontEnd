@@ -4,7 +4,7 @@ function Addcommon(){
 
     const[id,setId] = useState('')
     const[uses,setUses] = useState('')
-    const[specialData,setSpecialData] = useState('')
+    const[specialData,setSpecialData] = useState("special")
     const[size,setSize] = useState('')
     const[material,setMaterial] = useState('')
     const[brand,setBrand] = useState('')
@@ -16,60 +16,57 @@ function Addcommon(){
     //[primaryData,setPrimaryData] = useState('')
     const[producerId,setProducer] = useState(0)
     const[categoryId,setCategory] = useState(0)
+    const[valid,setValid]=useState(false)
     const[productions,setProductions]= useState([])
 
     const addProduct=(e)=>{
       
-      fetch("http://localhost:8080/intouncommon/getcategories",{
-        headers:{"header":localStorage.getItem("user")}
+      const commonCheckDto = {categoryId , producerId}
+      fetch("https://into-uncommon.herokuapp.com/intouncommon/checkCommon",{
+        headers:{"header":localStorage.getItem("user")},
+        body:JSON.stringify(commonCheckDto)
       })
-      .then(res=>res.json())
+      .then(res=>res.text())
       .then((result)=>{
+        console.log(result)
       var i =0
-      for(i=0;i<result.length;i++){
-        if(result[i].categoryId==categoryId && result[i].common==true){
-          if(producerId==null||producerId==0){
-            alert("Invalid producer or invalid state id")
-            window.location="http://localhost:3000/product"
-          }
+        if(result!=="error"){
+          
           const category = {categoryId}
       const producer ={producerId}
-       const production = {id,uses,brand,specialData,size,color,material,price,warranty,options,delivery,category,producer}
-       alert(production)
-        fetch("http://localhost:8080/intouncommon/product/add",{
+       const production = {id,uses,brand,specialData,size,color,material,price,warranty,options,delivery}
+       const productionDto ={productions:production,categoryId,producerId}
+       alert(productionDto)
+        fetch("https://into-uncommon.herokuapp.com/intouncommon/product/add",{
             method:"POST",
-            headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*"},
-            body:JSON.stringify(production)
+            headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
+            body:JSON.stringify(productionDto)
           })
           .then(res=>res.text())
           .then((result)=>{
             console.log(result)
             var error = "Error username or password"
             if(result==error){
-              window.location="http://localhost:3000"
+              window.location="/"
             }
           else{
-            window.location="http://localhost:3000/product"
+            window.location="/product"
           }
           })
           
         }
         else{
-          if(result[i].categoryId==categoryId){
-            alert("Wrong Type Category")
-            window.location="http://localhost:3000/product"
-            break
-          }
+          alert("Invalid producer or invalid category")
+            window.location="/product"
         }
         
-    }
 })
       
        
     }
     const showProducers=(e)=>{
         console.log(localStorage.getItem("user"))
-        fetch("http://localhost:8080/intouncommon/getproducers",{
+        fetch("https://into-uncommon.herokuapp.com/intouncommon/getproducers",{
           headers:{"header":localStorage.getItem("user")}
         })
         .then(res=>res.json())
@@ -87,20 +84,20 @@ function Addcommon(){
         string+="</ul></p></li>"
       }
       string+="</ul>"
-      console.log(string)
-      localStorage.setItem("producerString",string)
-      alert(string)
+      frame.innerHTML = string
+    localStorage.setItem("catString",string)
+    alert(string)
   })
     }
 
     const showCateories=(e)=>{
-        fetch("http://localhost:8080/intouncommon/getcategories",{
+        fetch("https://into-uncommon.herokuapp.com/intouncommon/getcategories",{
         headers:{"header":localStorage.getItem("user")}
       })
       .then(res=>res.json())
       .then((result)=>{
       var string="<h3 style='color:red;'>Available Categories</h3><ul>"
-      var frame = document.getElementById("showing")
+      var frame = document.getElementById("showingcat")
       var i =0
       for(i=0;i<result.length;i++){
         if(result[i].common==true){
@@ -115,30 +112,49 @@ function Addcommon(){
       }
 
       useEffect(()=>{
-        if(localStorage.getItem("catString")==null){
+        if(!valid){
+          console.log(valid)
+          fetch("https://into-uncommon.herokuapp.com/intouncommon/getvalidity",{
+            headers:{"header":localStorage.getItem("user")}
+          })
+          .then(res=>res.text())
+          .then((result)=>{
+            console.log(result)
+            if(result==="successful"){
+              setValid(true)
+            }
+          })
+        }
+        // if(localStorage.getItem("catString")==null){
         
-        }
-        else{
-          var frame = document.getElementById("showing")
-          frame.innerHTML = localStorage.getItem("catString");
-          localStorage.removeItem("catString")
-        }
-        if(localStorage.getItem("producerString")==null){
+        // }
+        // else{
+        //   var frame = document.getElementById("showing")
+        //   frame.innerHTML = localStorage.getItem("catString");
+        //   localStorage.removeItem("catString")
+        // }
+        // if(localStorage.getItem("producerString")==null){
         
-        }
-        else{
-          var frame = document.getElementById("showing")
-          frame.innerHTML = localStorage.getItem("producerString");
-          localStorage.removeItem("producerString")
-        }
+        // }
+        // else{
+        //   var frame = document.getElementById("showing")
+        //   frame.innerHTML = localStorage.getItem("producerString");
+        //   localStorage.removeItem("producerString")
+        // }
       },[])
 
 
     return(
-        <div><div class="links" style={{textAlign:"left"}}>
+        <div>
+          {valid?<div><div class="links" style={{textAlign:"left"}}>
         <a href="/product"><p style={{color: "green"}}><b>BACK</b></p></a>
         <br></br>
         </div>
+        <div style={{textAlign:"left" , top:0}}>
+            
+            <button onClick={showProducers}>SHOW PRODUCERS</button><br></br>
+            <button onClick={showCateories}>SHOW CATEGORIES</button>
+           </div>
         <div id="adding" style={{textAlign:"center"}}>
            
               <h1 style={{textAlign:"center",color:"purple"}}><u>Common Products</u></h1>
@@ -146,7 +162,7 @@ function Addcommon(){
               
             <form>
             <label style={{color: "blue"}}>Brand Name</label><br></br>
-                <input label="Type" varient="Outlined" fullWidth placeholder="USES"
+                <input label="Type" varient="Outlined" fullWidth placeholder="BRAND"
     value={brand}
     onChange={(e)=>setBrand(e.target.value)}>
                 </input><br></br><br></br>
@@ -154,12 +170,8 @@ function Addcommon(){
                 <input label="Type" varient="Outlined" fullWidth placeholder="USES"
     value={uses}
     onChange={(e)=>setUses(e.target.value)}>
-                </input><br></br><br></br>
-                <label style={{color: "blue"}}>Special Details</label><br></br>
-                <input label="Common" varient="Outlined" fullWidth placeholder="Special Details"
-    value={specialData}
-    onChange={(e)=>setSpecialData(e.target.value)}>
                 </input><br></br>
+                
                 <label style={{color: "blue"}}>Size</label><br></br>
                 <input label="Common" varient="Outlined" fullWidth placeholder="Primary Details"
     value={size}
@@ -199,16 +211,14 @@ function Addcommon(){
                 <input label="Common" varient="Outlined" fullWidth placeholder="Category"
     value={categoryId}
     onChange={(e)=>setCategory(e.target.value)}>
-                </input><br></br>
-                <button style={{color: "white",background:"black"}} variant='contained' color = 'secondary' onClick={showCateories}>Show Categories</button>
+                </input>
                 <br></br>
                 <label style={{color: "blue"}}>Producer</label><br></br>
                 <input label="Common" varient="Outlined" fullWidth placeholder="Producer"
     value={producerId}
     onChange={(e)=>setProducer(e.target.value)}>
                 </input><br></br>
-                <button style={{color: "white",background:"black"}} variant='contained' color = 'secondary' onClick={showProducers}>Show Producers</button>
-                <br></br>
+                
             </form>
     <button style={{color: "white",background:"black"}} variant='contained' color = 'secondary' onClick={addProduct}>Submit</button>
             </div>
@@ -216,7 +226,11 @@ function Addcommon(){
         <a href="/productimages"><p style={{color: "green"}}><b>Add Images</b></p></a>
         <br></br>
         </div>
-            <div id="showing"></div>
+        <div id="showingcat"></div>
+      <div class="shawing" id="showing" >
+      
+      </div>
+        </div>:<div><h2>Log In First</h2></div>}
         </div>
     )
 }

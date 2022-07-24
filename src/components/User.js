@@ -13,7 +13,7 @@ function User(){
         console.log(user)
         fetch("http://localhost:8080/intouncommon/user/add",{
             method:"POST",
-            headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*"},
+            headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
             body:JSON.stringify(user)
           })
           .then(res=>res.text())
@@ -92,7 +92,7 @@ function User(){
             localStorage.removeItem("updateCondition")
             fetch("http://localhost:8080/intouncommon/user/update?id="+localStorage.getItem("userId"),{
               method:"PUT",
-              headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*"},
+              headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
               body:JSON.stringify(user)
             })
             .then(res=>res.text())

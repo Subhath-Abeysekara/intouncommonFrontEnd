@@ -1,5 +1,5 @@
 import axios  from "axios";
 
 export default axios.create({
-    baseURL: "http://localhost:8080/intouncommon",
+    baseURL: "https://into-uncommon.herokuapp.com/intouncommon",
   });

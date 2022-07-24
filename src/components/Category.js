@@ -6,13 +6,14 @@ function Category(){
     const[common,setCommon] = useState(Boolean)
     const[material,setMaterial] = useState('')
     const[categoryId,setCategoryId]=useState(0)
+    const[valid,setValid]=useState(false)
     const[categories,setCategories] = useState([])
     const addCategory=(e)=>{
         const category ={type,common,material}
         console.log(category)
-        fetch("http://localhost:8080/intouncommon/category/add",{
+        fetch("https://into-uncommon.herokuapp.com/intouncommon/category/add",{
             method:"POST",
-            headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*"},
+            headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
             body:JSON.stringify(category)
           })
           .then(res=>res.text())
@@ -20,40 +21,21 @@ function Category(){
             console.log(result)
             var error = "Error username or password"
             if(result==error){
-              window.location="http://localhost:3000"
+              window.location="/"
             }
           else{
-            window.location="http://localhost:3000/category"
+            window.location="/category"
           }
           })
         }
 
-        const deleteCategory=(e)=>{
-          fetch("http://localhost:8080/intouncommon/category/delete?id="+categoryId,{
-            method:"DELETE",
-            headers:{"header":localStorage.getItem("user")}
-          })
-          .then(res=>res.json())
-          .then((result)=>{
-            var error = ""
-            console.log(error)
-        if(result==error){
-          window.location="http://localhost:3000"
+        function logOut(){
+          localStorage.removeItem("user");
+          window.location="/"
         }
-      else{
-        window.location="http://localhost:3000/category"
-      }        
-    })
-        }
-    useEffect(()=>{
-        console.log(localStorage.getItem("user"))
-        localStorage.removeItem("userId")
-              localStorage.removeItem("name")
-              localStorage.removeItem("password")
-              localStorage.removeItem("email")
-              localStorage.removeItem("contact")
-              localStorage.removeItem("updateCondition")
-        fetch("http://localhost:8080/intouncommon/getcategories",{
+
+        function showCats(){
+          fetch("https://into-uncommon.herokuapp.com/intouncommon/getcategories",{
           headers:{"header":localStorage.getItem("user")}
         })
         .then(res=>res.json())
@@ -68,10 +50,55 @@ function Category(){
       frame.innerHTML = string
            
   })
+        }
+
+        const deleteCategory=(e)=>{
+          console.log(categoryId)
+          fetch("https://into-uncommon.herokuapp.com/intouncommon/category/delete?id="+categoryId,{
+            method:"DELETE",
+            headers:{"header":localStorage.getItem("user")}
+          })
+          .then(res=>res.text)
+          .then((result)=>{
+            var error = ""
+            alert(result)
+            console.log(result)
+        if(result==error){
+          window.location="/"
+        }
+      else{
+        window.location="/category"
+      }        
+    })
+        }
+    useEffect(()=>{
+      if(!valid){
+        console.log(valid)
+        fetch("https://into-uncommon.herokuapp.com/intouncommon/getvalidity",{
+          headers:{"header":localStorage.getItem("user")}
+        })
+        .then(res=>res.text())
+        .then((result)=>{
+          console.log(result)
+          if(result==="successful"){
+            setValid(true)
+          }
+        })
+      }
+          console.log(localStorage.getItem("user"))
+        localStorage.removeItem("userId")
+              localStorage.removeItem("name")
+              localStorage.removeItem("password")
+              localStorage.removeItem("email")
+              localStorage.removeItem("contact")
+              localStorage.removeItem("updateCondition")
+        
+      
       },[])
 
     return(
         <div>
+          {valid?<div>
           <div class="links" style={{textAlign:"right"}}>
           <a href="/product"><p style={{color: "green"}}><b>PRODUCTS</b></p></a>
             <a href="/producer"><p style={{color: "green"}}><b>PRODUCERS</b></p></a>
@@ -79,7 +106,10 @@ function Category(){
             <a href="/state"><p style={{color: "green"}}><b>STATES</b></p></a>
             <a href="/account"><p style={{color: "orange"}}><b>MANAGE MY ACCOUNT</b></p></a>
           </div>
-           
+           <div style={{textAlign:"left" , top:0}}>
+            <button onClick={logOut}>SIGN OUT</button><br></br>
+            <button onClick={showCats}>SHOW CATEGORIES</button>
+           </div>
             <div id="adding" style={{textAlign:"center"}}>
            
               <h1 style={{textAlign:"center",color:"purple"}}><u>Category</u></h1>
@@ -95,7 +125,7 @@ function Category(){
                 <input label="Common" varient="Outlined" fullWidth placeholder="COMMON"
     value={common}
     onChange={(e)=>setCommon(e.target.value)}>
-                </input>
+                </input><br></br><br></br>
                 <label style={{color: "blue"}}>Category Material</label><br></br>
                 <input label="Common" varient="Outlined" fullWidth placeholder="COMMON"
     value={material}
@@ -118,6 +148,7 @@ function Category(){
             <div class="shawing" id="showing" >
             
             </div>
+        </div>:<div><h2>Log In First</h2></div>}
         </div>
     );
 }
