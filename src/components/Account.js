@@ -6,13 +6,27 @@ function Account(){
     const[username,setUsername] = useState('')
     const[password,setPassword] = useState('')
     const[valid,setValid]=useState(false)
+
+    function releaseToken(changedToken){
+
+      var token = ""
+      var key = "qwerty"
+      for(var i =0; i<changedToken.length-6; i++){
+        token+=changedToken[i]
+      }
+    console.log(token)
+    //setToken(token)
+    return token
+
+    }
+
     const handleClick=(e)=>{
       e.preventDefault()
       const admin ={username,password}
      // console.log(student)
       fetch("https://into-uncommon.herokuapp.com/intouncommon/checkAdmin",{
         method:"POST",
-        headers:{"header":localStorage.getItem("user")},
+        headers:{"header":releaseToken(localStorage.getItem("user"))},
         body:JSON.stringify(admin)
       })
       .then(res=>res.text())
@@ -34,7 +48,7 @@ function Account(){
       if(!valid){
         console.log(valid)
         fetch("https://into-uncommon.herokuapp.com/intouncommon/getvalidity",{
-          headers:{"header":localStorage.getItem("user")}
+          headers:{"header":releaseToken(localStorage.getItem("user"))}
         })
         .then(res=>res.text())
         .then((result)=>{
@@ -54,7 +68,7 @@ function Account(){
 value={username}
 onChange={(e)=>setUsername(e.target.value)}>
             </input><br></br>
-            <input label="Password" varient="Outlined" fullWidth
+            <input label="Password" varient="Outlined" fullWidth  type={"password"}
 value={password}
 onChange={(e)=>setPassword(e.target.value)}>
             </input>

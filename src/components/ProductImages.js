@@ -10,9 +10,23 @@ function ProductImages(){
     const[id,setId] = useState(localStorage.getItem("id"))
     const[valid,setValid]=useState(false)
 
+    function releaseToken(changedToken){
+
+      var token = ""
+      var key = "qwerty"
+      for(var i =0; i<changedToken.length-6; i++){
+        token+=changedToken[i]
+      }
+    console.log(token)
+    //setToken(token)
+    return token
+
+    }
+
+
     const enterId=(e)=>{
         fetch("https://into-uncommon.herokuapp.com/intouncommon/getproducts",{
-            headers:{"header":localStorage.getItem("user")}
+            headers:{"header":releaseToken(localStorage.getItem("user"))}
           })
           .then(res=>res.json())
           .then((result)=>{
@@ -40,7 +54,7 @@ function ProductImages(){
                 alert("image havent selected")
                 return}
                 fetch("https://into-uncommon.herokuapp.com/intouncommon/getAmount?id="+localStorage.getItem("id"),{
-        headers:{"header":localStorage.getItem("user")}
+        headers:{"header":releaseToken(localStorage.getItem("user"))}
       })
       .then(res=>res.json())
       .then((result)=>{
@@ -53,7 +67,7 @@ function ProductImages(){
                 const productImageDTO = {productId : id , productImages}
                 fetch("https://into-uncommon.herokuapp.com/intouncommon/product/url/add",{
               method:"POST",
-              headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
+              headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":releaseToken(localStorage.getItem("user"))},
               body : JSON.stringify(productImageDTO)
             })
             .then(res=>res.text())
@@ -68,19 +82,19 @@ function ProductImages(){
         })
         fetch("https://into-uncommon.herokuapp.com/intouncommon/addAmount?id="+localStorage.getItem("id")+"&"+"amount="+result+1,{
               method:"PUT",
-              headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
+              headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":releaseToken(localStorage.getItem("user"))},
             })
             .then(res=>res.text())
             .then((result2)=>{})
       })
            
         })
-    }
+    } 
 }
 
 function showProducts(){
     fetch("https://into-uncommon.herokuapp.com/intouncommon/getproducts",{
-          headers:{"header":localStorage.getItem("user")}
+          headers:{"header":releaseToken(localStorage.getItem("user"))}
         })
         .then(res=>res.json())
         .then((result)=>{
@@ -133,7 +147,7 @@ function showImages(){
         if(!valid){
             console.log(valid)
             fetch("https://into-uncommon.herokuapp.com/intouncommon/getvalidity",{
-              headers:{"header":localStorage.getItem("user")}
+              headers:{"header":releaseToken(localStorage.getItem("user"))}
             })
             .then(res=>res.text())
             .then((result)=>{

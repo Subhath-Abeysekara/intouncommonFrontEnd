@@ -13,6 +13,20 @@ function Producer(){
     const[producer,setProducer] = useState([])
     const[valid,setValid]=useState(false)
 
+
+    function releaseToken(changedToken){
+
+      var token = ""
+      var key = "qwerty"
+      for(var i =0; i<changedToken.length-6; i++){
+        token+=changedToken[i]
+      }
+    console.log(token)
+    //setToken(token)
+    return token
+
+    }
+
     const addProducer=(e)=>{
       if(localStorage.getItem("catcount")==null){
         alert("You should enter the category Count first")
@@ -33,7 +47,7 @@ function Producer(){
         console.log(producer)
         fetch("https://into-uncommon.herokuapp.com/intouncommon/producer/add",{
             method:"POST",
-            headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
+            headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":releaseToken(localStorage.getItem("user"))},
             body:JSON.stringify(producer)
           })
           .then(res=>res.text())
@@ -72,7 +86,7 @@ function Producer(){
           else{
             fetch("https://into-uncommon.herokuapp.com/intouncommon/producer/delete?id="+producerId,{
             method:"DELETE",
-            headers:{"header":localStorage.getItem("user")}
+            headers:{"header":releaseToken(localStorage.getItem("user"))}
           })
           .then(res=>res.json())
           .then((result)=>{
@@ -154,7 +168,7 @@ function Producer(){
         }
         function showCateories(){
           fetch("https://into-uncommon.herokuapp.com/intouncommon/getcategories",{
-          headers:{"header":localStorage.getItem("user")}
+          headers:{"header":releaseToken(localStorage.getItem("user"))}
         })
         .then(res=>res.json())
         .then((result)=>{
@@ -173,7 +187,7 @@ function Producer(){
 
         function showCats(){
           fetch("https://into-uncommon.herokuapp.com/intouncommon/getcategories",{
-          headers:{"header":localStorage.getItem("user")}
+          headers:{"header":releaseToken(localStorage.getItem("user"))}
         })
         .then(res=>res.json())
         .then((result)=>{
@@ -191,7 +205,7 @@ function Producer(){
 
         function updateProducer(){
           fetch("https://into-uncommon.herokuapp.com/intouncommon/getproducers",{
-          headers:{"header":localStorage.getItem("user")}
+          headers:{"header":releaseToken(localStorage.getItem("user"))}
         })
         .then(res=>res.json())
         .then((result)=>{
@@ -237,7 +251,7 @@ function Producer(){
             localStorage.removeItem("updateCondition")
             fetch("https://into-uncommon.herokuapp.com/intouncommon/producer/update?id="+localStorage.getItem("producerId"),{
               method:"PUT",
-              headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
+              headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":releaseToken(localStorage.getItem("user"))},
               body:JSON.stringify(producer)
             })
             .then(res=>res.text())
@@ -301,7 +315,7 @@ function Producer(){
       if(!valid){
         console.log(valid)
         fetch("https://into-uncommon.herokuapp.com/intouncommon/getvalidity",{
-          headers:{"header":localStorage.getItem("user")}
+          headers:{"header":releaseToken(localStorage.getItem("user"))}
         })
         .then(res=>res.text())
         .then((result)=>{

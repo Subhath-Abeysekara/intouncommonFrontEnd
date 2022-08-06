@@ -5,9 +5,11 @@ import Image2 from './Images/web instruction for INVENTORS WEB2.png';
 import Image3 from './Images/web instruction for INVENTORS WEB3.png';
 import Image4 from './Images/web instruction for INVENTORS WEB4.png';
 import Image5 from './Images/web instruction for INVENTORS WEB5.png';
+import Image10 from './Images/web instruction for INVENTORS WEB6.png';
 import Image6 from './Images/designer instrction WEB1.png';
 import Image7 from './Images/designer instrction WEB2.png';
 import Image8 from './Images/designer instrction WEB3.png';
+import Image11 from './Images/designer instrction WEB4.png';
 import Image9 from './Images/image01.png';
 
 
@@ -37,6 +39,13 @@ function UncommonProject(){
                 setInventer(false)
                 setDesigner(true)
             }
+            else{
+                if(localStorage.getItem("project")==="3"){
+                    setInventer(false)
+                    setDesigner(false)
+                    window.location = "/uploadimages" 
+                }
+            }
         }
     },[])
     return(
@@ -57,6 +66,9 @@ function UncommonProject(){
                 <div className="imageHolder imageHolder5" >
                  <img class='image' src={Image5}/>
                 </div>
+                <div className="imageHolder imageHolder6" >
+                 <img class='image' src={Image10}/>
+                </div>
 </div>:<div>
     {designer?<div className="project2">
     <div className="imageHolder imageHolder1" >
@@ -67,6 +79,9 @@ function UncommonProject(){
                 </div>
                 <div className="imageHolder imageHolder3" >
                  <img class='image' src={Image8}/>
+                </div>
+                <div className="imageHolder imageHolder4" >
+                 <img class='image' src={Image11}/>
                 </div>
 </div>:<div className="projectHolder">
     <span style={{color: "rgb(109, 108, 108)" , fontSize:"1vw"}}>Clicke Hear... </span>

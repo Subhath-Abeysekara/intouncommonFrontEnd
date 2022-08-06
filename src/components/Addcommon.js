@@ -19,11 +19,24 @@ function Addcommon(){
     const[valid,setValid]=useState(false)
     const[productions,setProductions]= useState([])
 
+    function releaseToken(changedToken){
+
+      var token = ""
+      var key = "qwerty"
+      for(var i =0; i<changedToken.length-6; i++){
+        token+=changedToken[i]
+      }
+    console.log(token)
+    //setToken(token)
+    return token
+
+    }
+
     const addProduct=(e)=>{
       
       const commonCheckDto = {categoryId , producerId}
       fetch("https://into-uncommon.herokuapp.com/intouncommon/checkCommon",{
-        headers:{"header":localStorage.getItem("user")},
+        headers:{"header":releaseToken(localStorage.getItem("user"))},
         body:JSON.stringify(commonCheckDto)
       })
       .then(res=>res.text())
@@ -39,7 +52,7 @@ function Addcommon(){
        alert(productionDto)
         fetch("https://into-uncommon.herokuapp.com/intouncommon/product/add",{
             method:"POST",
-            headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
+            headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":releaseToken(localStorage.getItem("user"))},
             body:JSON.stringify(productionDto)
           })
           .then(res=>res.text())
@@ -67,7 +80,7 @@ function Addcommon(){
     const showProducers=(e)=>{
         console.log(localStorage.getItem("user"))
         fetch("https://into-uncommon.herokuapp.com/intouncommon/getproducers",{
-          headers:{"header":localStorage.getItem("user")}
+          headers:{"header":releaseToken(localStorage.getItem("user"))}
         })
         .then(res=>res.json())
         .then((result)=>{
@@ -92,7 +105,7 @@ function Addcommon(){
 
     const showCateories=(e)=>{
         fetch("https://into-uncommon.herokuapp.com/intouncommon/getcategories",{
-        headers:{"header":localStorage.getItem("user")}
+        headers:{"header":releaseToken(localStorage.getItem("user"))}
       })
       .then(res=>res.json())
       .then((result)=>{
@@ -115,7 +128,7 @@ function Addcommon(){
         if(!valid){
           console.log(valid)
           fetch("https://into-uncommon.herokuapp.com/intouncommon/getvalidity",{
-            headers:{"header":localStorage.getItem("user")}
+            headers:{"header":releaseToken(localStorage.getItem("user"))}
           })
           .then(res=>res.text())
           .then((result)=>{

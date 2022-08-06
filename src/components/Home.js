@@ -21,7 +21,7 @@ function Home(){
     // const[frame , setFrame] = useState(false)
     // const[sizeCom , setSizeCom] = useState(0)
 
-    const projects = [{id:1,project : "inventor",caption:"Join as a inventor with intouncommon"},{id:2,project : "designer",caption:"Join as a designer with intouncommon"}]
+    const projects = [{id:1,project : "inventor",caption:"Join as a inventor with intouncommon"},{id:2,project : "designer",caption:"Join as a designer with intouncommon"},{id:3,project : "Register",caption:"register and add your product images"}]
 
     const addImage=(n)=>{
         var x = document.getElementById("images")
@@ -61,15 +61,15 @@ function Home(){
               }
       else{
         setConditionUncoomn(true)
-        var sizz = uncommonCategory.length*3+30
+        var sizz = uncommonCategory.length
 
         
-          setSize(uncommonCategory.length*3+40)
-          console.log("size "+sizz + "length "+ uncommonCategory.length)
-          if(uncommonCategory.length*6>=84){
+          setSize(uncommonCategory.length*3+20)
+          console.log("size "+sizz + " length "+ uncommonCategory.length)
+          if(uncommonCategory.length*3>=40){
             //setFrame(true)
-            var botto = uncommonCategory.length*3+40 -105
-            botto = botto*100/86
+            var botto = uncommonCategory.length*3+20 -50
+            botto = botto*100/40
            // botto=botto-2
             setBottom(-botto)
             console.log("bottom "+botto)
@@ -99,14 +99,14 @@ function Home(){
                 }
         else{
           setConditionCommon(true)
-          var sizz = commonCategory.length*3+30
+          var sizz = commonCategory.length*3+20
         
-          setSize(commonCategory.length*3+30)
+          setSize(commonCategory.length*3+20)
           console.log("size "+sizz + "length "+ commonCategory.length)
-          if(commonCategory.length*3>=84){
+          if(commonCategory.length*3>=40){
             //setFrame(true)
-            var botto = commonCategory.length*3+30 -105
-            botto = botto*100/86
+            var botto = commonCategory.length*3+20 -50
+            botto = botto*100/40
            // botto=botto-2
             setBottom(-botto)
             console.log("bottom "+botto)
@@ -179,6 +179,7 @@ function Home(){
         })
         .then(res=>res.json())
         .then((result)=>{
+          console.log("cats ",result)
             setCategory(result)
             if(result !==null){
 
@@ -209,15 +210,15 @@ function Home(){
                   });
                   console.log("uncom"+uncopy)
                   setUncommon(uncopy)
-                  var sizz = uncopy.length*6+30
+                  var sizz = uncopy.length*3+30
 
         if(size<=sizz){
-          setSize(uncopy.length*6+40)
+          setSize(uncopy.length*3+20)
           console.log("size "+sizz + "length "+ uncopy.length)
-          if(uncopy.length*6>=84){
+          if(uncopy.length*3>=40){
             //setFrame(true)
-            var botto = uncopy.length*6+40 -105
-            botto = botto*100/86
+            var botto = uncopy.length*3+20-50
+            botto = botto*100/40
            // botto=botto-2
             setBottom(-botto)
             console.log("bottom "+botto)
@@ -278,7 +279,7 @@ function Home(){
                   <ImageContainer></ImageContainer>
               </div>
               <div className="cover"></div>
-              <div className="madeBy" id="profile" style={{bottom:bottom+"%"}}><marquee><a href="/createBy"><p style={{color: "rgb(109, 108, 108)" , fontSize:"8px" , bottom:"10%"}}>Create By : Subhath Abeysekara / Bsc(Hons) in Information Technology in UOM(UG) / Click Here For More Details</p></a></marquee></div> 
+              <div className="madeBy" id="profile" style={{bottom:bottom+"%"}}><marquee><a href="/createBy"><p style={{color: "rgb(241, 233, 233)" , fontSize:"0.7vw" , bottom:"10%"}}>Create By : Subhath Abeysekara & three69 / Bsc(Hons) in Information Technology in UOM(UG) / Click Here For More Details</p></a></marquee></div> 
               
               
           </div>

@@ -31,8 +31,9 @@
     top: -11.11%;
     left: 35%;
     font-size: 2vw;
-    text-shadow: -2px 2px 4px rgba(238, 234, 234, 0.1),
-    2px -2px 0 rgba(34, 33, 33, 5);
+    text-shadow: -1vw 1vw 2vw rgba(238, 234, 234, 0.1),
+    0.2vw -0vw 0 rgba(34, 33, 33, 5);
+   
 }
 .text1{
     position: absolute;
@@ -47,7 +48,7 @@
     color: rgb(32,14,14);
     right: 20%;
     
-    font-size: 0.7vw;
+    font-size: 0.5vw;
     
 }
 .text2{
@@ -55,9 +56,9 @@
     2px -2px 0 rgba(34, 33, 33, 5);
 }
 .text3{
-    font-size: 1.1vw;
-    right:1% ;
-    bottom: -15%;
+    font-size: 0.9vw;
+    right:1.6% ;
+    bottom: -5%;
 
 }
 .underline1,.underline2{

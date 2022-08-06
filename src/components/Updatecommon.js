@@ -19,9 +19,22 @@ function Updatecommon(){
     const[valid,setValid]=useState(false)
     const[production,setProductions]= useState([])
 
+    function releaseToken(changedToken){
+
+      var token = ""
+      var key = "qwerty"
+      for(var i =0; i<changedToken.length-6; i++){
+        token+=changedToken[i]
+      }
+    console.log(token)
+    //setToken(token)
+    return token
+
+    }
+
     const updateProducter=(e)=>{
         fetch("https://into-uncommon.herokuapp.com/intouncommon/getproducts",{
-        headers:{"header":localStorage.getItem("user")}
+        headers:{"header":releaseToken(localStorage.getItem("user"))}
       })
       .then(res=>res.json())
       .then((result)=>{
@@ -63,7 +76,7 @@ function Updatecommon(){
             
             fetch("https://into-uncommon.herokuapp.com/product/update?id="+localStorage.getItem("id"),{
               method:"PUT",
-              headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
+              headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":releaseToken(localStorage.getItem("user"))},
               body:JSON.stringify(production)
             })
             .then(res=>res.text())
@@ -101,7 +114,7 @@ function Updatecommon(){
             function showProducts(){
               console.log(localStorage.getItem("user"))
               fetch("https://into-uncommon.herokuapp.com/intouncommon/getproducts",{
-                headers:{"header":localStorage.getItem("user")}
+                headers:{"header":releaseToken(localStorage.getItem("user"))}
               })
               .then(res=>res.json())
               .then((result)=>{
@@ -132,7 +145,7 @@ function Updatecommon(){
               if(!valid){
                 console.log(valid)
                 fetch("https://into-uncommon.herokuapp.com/intouncommon/getvalidity",{
-                  headers:{"header":localStorage.getItem("user")}
+                  headers:{"header":releaseToken(localStorage.getItem("user"))}
                 })
                 .then(res=>res.text())
                 .then((result)=>{

@@ -13,10 +13,23 @@ function Product(){
     const[productions,setProductions]= useState([])
     const[valid,setValid]=useState(false)
 
+    function releaseToken(changedToken){
+
+      var token = ""
+      var key = "qwerty"
+      for(var i =0; i<changedToken.length-6; i++){
+        token+=changedToken[i]
+      }
+    console.log(token)
+    //setToken(token)
+    return token
+
+    }
+
     const deleteProduct=(e)=>{
         fetch("https://into-uncommon.herokuapp.com/intouncommon/product/delete?id="+id,{
           method:"DELETE",
-          headers:{"header":localStorage.getItem("user")}
+          headers:{"header":releaseToken(localStorage.getItem("user"))}
         })
         .then(res=>res.json())
         .then((result)=>{
@@ -33,7 +46,7 @@ function Product(){
 
       function showProducts(){
         fetch("https://into-uncommon.herokuapp.com/intouncommon/getproducts",{
-          headers:{"header":localStorage.getItem("user")}
+          headers:{"header":releaseToken(localStorage.getItem("user"))}
         })
         .then(res=>res.json())
         .then((result)=>{
@@ -66,7 +79,7 @@ function Product(){
 
       function showProduct(){
         fetch("https://into-uncommon.herokuapp.com/intouncommon/get/product?id="+id,{
-          headers:{"header":localStorage.getItem("user")}
+          headers:{"header":releaseToken(localStorage.getItem("user"))}
         })
         .then(res=>res.json())
         .then((result)=>{
@@ -100,7 +113,7 @@ function Product(){
     if(!valid){
       console.log(valid)
       fetch("https://into-uncommon.herokuapp.com/intouncommon/getvalidity",{
-        headers:{"header":localStorage.getItem("user")}
+        headers:{"header":releaseToken(localStorage.getItem("user"))}
       })
       .then(res=>res.text())
       .then((result)=>{

@@ -19,21 +19,21 @@
 .project1{
     position: absolute;
     width: 100%;
-    height: 335vw;
+    height: 465vw;
     background: black;
 }
 
 .project2{
     position: absolute;
     width: 100%;
-    height: 201vw;
+    height: 310vw;
     background: black;
 }
 
 .imageHolder{
     position: absolute;
-    width: 50%;
-    height: 65vw;
+    width: 60%;
+    height: 75vw;
     left:25%;
 }
 
@@ -42,15 +42,19 @@
 }
 
 .imageHolder2{
-    top: 67vw;
+    top: 77vw;
 }
 .imageHolder3{
-    top: 134vw;
+    top: 154vw;
 }
 .imageHolder4{
-    top: 201vw;
+    top: 231vw;
 }
 
 .imageHolder5{
-    top: 268vw;
+    top: 308vw;
+}
+
+.imageHolder6{
+    top: 385vw;
 }

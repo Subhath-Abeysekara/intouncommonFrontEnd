@@ -8,12 +8,26 @@ function Category(){
     const[categoryId,setCategoryId]=useState(0)
     const[valid,setValid]=useState(false)
     const[categories,setCategories] = useState([])
+    const[token , setToken] = useState("")
+
+    function releaseToken(changedToken){
+
+      var token = ""
+      var key = "qwerty"
+      for(var i =0; i<changedToken.length-6; i++){
+        token+=changedToken[i]
+      }
+    console.log(token)
+    setToken(token)
+    return token
+
+    }
     const addCategory=(e)=>{
         const category ={type,common,material}
         console.log(category)
         fetch("https://into-uncommon.herokuapp.com/intouncommon/category/add",{
             method:"POST",
-            headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
+            headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":releaseToken(localStorage.getItem("user"))},
             body:JSON.stringify(category)
           })
           .then(res=>res.text())
@@ -36,7 +50,7 @@ function Category(){
 
         function showCats(){
           fetch("https://into-uncommon.herokuapp.com/intouncommon/getcategories",{
-          headers:{"header":localStorage.getItem("user")}
+          headers:{"header":releaseToken(localStorage.getItem("user"))}
         })
         .then(res=>res.json())
         .then((result)=>{
@@ -56,7 +70,7 @@ function Category(){
           console.log(categoryId)
           fetch("https://into-uncommon.herokuapp.com/intouncommon/category/delete?id="+categoryId,{
             method:"DELETE",
-            headers:{"header":localStorage.getItem("user")}
+            headers:{"header":releaseToken(localStorage.getItem("user"))}
           })
           .then(res=>res.text)
           .then((result)=>{
@@ -74,8 +88,9 @@ function Category(){
     useEffect(()=>{
       if(!valid){
         console.log(valid)
+        console.log("token ",token )
         fetch("https://into-uncommon.herokuapp.com/intouncommon/getvalidity",{
-          headers:{"header":localStorage.getItem("user")}
+          headers:{"header":releaseToken(localStorage.getItem("user"))}
         })
         .then(res=>res.text())
         .then((result)=>{

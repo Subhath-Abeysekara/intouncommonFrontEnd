@@ -23,6 +23,7 @@ import Updatecommon from './components/Updatecommon';
 import ProductImages from './components/ProductImages';
 import CommonProduct2 from './components/CommonProduct2';
 import CreateBy from './components/CreateBy';
+import UploadImage from './components/UploadImage';
 import { fetchCommon } from './redux/commonSlice';
 import store from './redux/store/store'
 import { Provider } from 'react-redux';
@@ -56,6 +57,7 @@ root.render(
       <Route path='/updateuncommon' element={<Updateuncommon/>}/>
       <Route path='/updatecommon' element={<Updatecommon/>}/>
       <Route path='/productimages' element={<ProductImages/>}/>
+      <Route path='/uploadimages' element={<UploadImage/>}/>
     </Routes>
   </Router>,
   </Provider>

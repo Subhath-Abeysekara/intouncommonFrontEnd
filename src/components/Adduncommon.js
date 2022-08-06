@@ -23,12 +23,25 @@ function Adduncommon(){
     const[valid,setValid]=useState(false)
     const[uncommonProduct,setProductions]= useState([])
 
+    function releaseToken(changedToken){
+
+      var token = ""
+      var key = "qwerty"
+      for(var i =0; i<changedToken.length-6; i++){
+        token+=changedToken[i]
+      }
+    console.log(token)
+    //setToken(token)
+    return token
+
+    }
+
     const addProduct=(e)=>{
       
       const uncommonCheckDto = {categoryId , producerId,stateId}
       fetch("https://into-uncommon.herokuapp.com/intouncommon/checkUncommon",{
         method:"POST",
-        headers:{"header":localStorage.getItem("user")},
+        headers:{"header":releaseToken(localStorage.getItem("user"))},
         body:JSON.stringify(uncommonCheckDto)
       })
       .then(res=>res.text())
@@ -44,7 +57,7 @@ function Adduncommon(){
            console.log(uncommonProductDto)
             fetch("https://into-uncommon.herokuapp.com/intouncommon/uncommon/add",{
                 method:"POST",
-                headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
+                headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":releaseToken(localStorage.getItem("user"))},
                 body:JSON.stringify(uncommonProductDto)
               })
               .then(res=>res.text())
@@ -71,7 +84,7 @@ function Adduncommon(){
     const showState=(e)=>{
         console.log(localStorage.getItem("user"))
         fetch("https://into-uncommon.herokuapp.com/intouncommon/getstates",{
-          headers:{"header":localStorage.getItem("user")}
+          headers:{"header":releaseToken(localStorage.getItem("user"))}
         })
         .then(res=>res.json())
         .then((result)=>{
@@ -90,7 +103,7 @@ function Adduncommon(){
     const showProducers=(e)=>{
         console.log(localStorage.getItem("user"))
         fetch("https://into-uncommon.herokuapp.com/intouncommon/getproducers",{
-          headers:{"header":localStorage.getItem("user")}
+          headers:{"header":releaseToken(localStorage.getItem("user"))}
         })
         .then(res=>res.json())
         .then((result)=>{
@@ -115,7 +128,7 @@ function Adduncommon(){
 
     const showCateories=(e)=>{
         fetch("https://into-uncommon.herokuapp.com/intouncommon/getcategories",{
-        headers:{"header":localStorage.getItem("user")}
+        headers:{"header":releaseToken(localStorage.getItem("user"))}
       })
       .then(res=>res.json())
       .then((result)=>{
@@ -138,7 +151,7 @@ function Adduncommon(){
         if(!valid){
           console.log(valid)
           fetch("https://into-uncommon.herokuapp.com/intouncommon/getvalidity",{
-            headers:{"header":localStorage.getItem("user")}
+            headers:{"header":releaseToken(localStorage.getItem("user"))}
           })
           .then(res=>res.text())
           .then((result)=>{

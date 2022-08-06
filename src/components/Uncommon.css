@@ -72,7 +72,7 @@
 .product{
     position: relative;
     width: 100%;
-    height: 120vh;
+    height: 45vw;
     background: rgb(231, 229, 229);
     left: 2%;
 }
@@ -107,10 +107,12 @@
     display: block;
     width:0;
     height: 0;
-    border:10px solid transparent;
+    right: 0;
+    top: 48%;
+    border:10% solid transparent;
     border-right-color: #ccc;
     border-left-width: 0;
-    transform: rotate(180deg);
+    transform: rotate(405deg);
     transition: background 0.5s;
 }
 .rightHandler:hover{
@@ -127,9 +129,9 @@
 
 .productid{
     position: absolute;
-    top: 13.8%;
+    top: 16%;
     left: 60%;
-    font-size: 1.2vw;
+    font-size: 1vw;
 }
 .productName{
     position: absolute;
@@ -140,7 +142,7 @@
 }
 .type{
     position: absolute;
-    top: 17%;
+    top: 18%;
     left: 60%;
     font-size: 1.3vw;
 }
@@ -209,27 +211,27 @@
 }
 .colorSymble{
     position: absolute;
-    width: 1.5%;
-    height: 2.7%;
+    width: 1.2vw;
+    height: 1.2vw;
     border-radius: 100%;
     background: rgb(8, 199, 8);
 }
 .symble1{
     left: 1%;
-    top: 61.8%;
+    top: 63.3%;
     
 }
 .symble2{
     left: 1%;
-    top: 65.8%;
+    top: 67.3%;
 }
 .symble3{
     left: 1%;
-    top: 69.8%;
+    top: 71.3%;
 }
 .symble4{
     left: 1%;
-    top: 73.8%;
+    top: 75.3%;
 }
 .benifit{
     position: absolute;
@@ -306,7 +308,7 @@
     height: 12%;
     width: 0.15%;
     background: black;
-    top: 31%;
+    top: 32%;
     left: 44%;
 }
 
@@ -317,34 +319,34 @@
     position: absolute;
     bottom: 1.29%;
     left: 4%;
-    font-size: 1.2vw;
+    font-size: 1vw;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .design{
     position: absolute;
     bottom: 1.29%;
     left: 24%;
-    font-size: 1.2vw;
+    font-size: 1vw;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .quality{
     position: absolute;
     bottom: 1.29%;
     left: 48%;
-    font-size: 1.2vw;
+    font-size: 1vw;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .inventor{
     position: absolute;
     bottom: 1.29%;
     left: 72%;
-    font-size: 1.2vw;
+    font-size: 1vw;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .colorBox{
     position: absolute;
-    width: 2%;
-    height: 3.5%;
+    width: 2vw;
+    height: 2vw;
     border-radius: 30%;
     background: black;
     bottom: 3%;

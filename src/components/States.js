@@ -10,13 +10,27 @@ function States(){
     const[stateId,setStateId]=useState(0)
     const[valid,setValid]=useState(false)
     const[statecode,setStatecode] = useState([])
+
+    function releaseToken(changedToken){
+
+      var token = ""
+      var key = "qwerty"
+      for(var i =0; i<changedToken.length-6; i++){
+        token+=changedToken[i]
+      }
+    console.log(token)
+    //setToken(token)
+    return token
+
+    }
+
     const addSateCode=(e)=>{
         const statecode ={repayColor,changeColor,warrantyColor,discountColor}
         console.log(statecode)
         alert(repayColor)
         fetch("https://into-uncommon.herokuapp.com/intouncommon/states/add",{
             method:"POST",
-            headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":localStorage.getItem("user")},
+            headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*","header":releaseToken(localStorage.getItem("user"))},
             body:JSON.stringify(statecode)
           })
           .then(res=>res.text())
@@ -35,7 +49,7 @@ function States(){
         const deleteStateCode=(e)=>{
           fetch("https://into-uncommon.herokuapp.com/intouncommon/states/delete?id="+stateId,{
             method:"DELETE",
-            headers:{"header":localStorage.getItem("user")}
+            headers:{"header":releaseToken(localStorage.getItem("user"))}
           })
           .then(res=>res.json())
           .then((result)=>{
@@ -53,7 +67,7 @@ function States(){
         function showStates(){
           console.log(localStorage.getItem("user"))
           fetch("https://into-uncommon.herokuapp.com/intouncommon/getstates",{
-            headers:{"header":localStorage.getItem("user")}
+            headers:{"header":releaseToken(localStorage.getItem("user"))}
           })
           .then(res=>res.json())
           .then((result)=>{
@@ -73,7 +87,7 @@ function States(){
       if(!valid){
         console.log(valid)
         fetch("https://into-uncommon.herokuapp.com/intouncommon/getvalidity",{
-          headers:{"header":localStorage.getItem("user")}
+          headers:{"header":releaseToken(localStorage.getItem("user"))}
         })
         .then(res=>res.text())
         .then((result)=>{

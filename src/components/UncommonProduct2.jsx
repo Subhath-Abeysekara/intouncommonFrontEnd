@@ -13,7 +13,7 @@ function UncommonProduct2(){
     }
 
         const [pid , setPid] = useState(localStorage.getItem("catId"));
-        localStorage.removeItem("catId")
+       // localStorage.removeItem("catId")
         const {common} = useSelector((state)=>state.common);
        
         const [sizeIndex,setIndex]= useState(0)
