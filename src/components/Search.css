@@ -1,0 +1,39 @@
+.lableSS{
+    position: absolute;
+    font-size: 1vw;
+    top: 95%;
+    color: rgb(222, 128, 235);
+}
+
+.inputS{
+    position: absolute;
+    width: 20vw;
+    top: 55%;
+    background: black;
+    color: white;
+    font-size: 0.9vw;
+}
+.inputsearch{
+    position: absolute;
+    top: 10%;
+}
+
+.fileId{
+    position: absolute;
+    top: 49%;
+}
+.delete{
+    position: absolute;
+    top: 49%;
+    left: 21vw;
+}
+.search{
+    position: absolute;
+    top: 10%;
+    left: 21vw;
+}
+
+.searchLable{
+    position: absolute;
+    top: 5%;
+}

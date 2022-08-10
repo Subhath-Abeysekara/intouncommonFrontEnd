@@ -73,6 +73,7 @@ function UploadImage(){
                     //alert("Added")
                     setErrorStringE("Your File Is Uploaded , Thank You!")
                     setErrorStringS("ඔබගේ ගොනුව උඩුගත කර ඇත, ස්තූතියි!")
+                    alert("Your File Is Uploaded , Thank You! / ඔබගේ ගොනුව උඩුගත කර ඇත, ස්තූතියි!")
                     setLogicIns(true);
                     setEror(true)
                     setSubmit(true)
@@ -80,6 +81,7 @@ function UploadImage(){
                 else{
                     setEror(true)
                     setSubmit(false)
+                    alert("error")
                     if(result2==="error contact"){
                         
                         setErrorStringE("Error Contact Type")

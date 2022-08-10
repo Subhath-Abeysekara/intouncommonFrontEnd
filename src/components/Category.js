@@ -119,6 +119,8 @@ function Category(){
             <a href="/producer"><p style={{color: "green"}}><b>PRODUCERS</b></p></a>
             <a href="/user"><p style={{color: "green"}}><b>USER</b></p></a>
             <a href="/state"><p style={{color: "green"}}><b>STATES</b></p></a>
+            <a href="/pending"><p style={{color: "green"}}><b>PENDING PRODUCERS</b></p></a>
+            <a href="/requests"><p style={{color: "green"}}><b>REQUESTED PRODUCERS</b></p></a>
             <a href="/account"><p style={{color: "orange"}}><b>MANAGE MY ACCOUNT</b></p></a>
           </div>
            <div style={{textAlign:"left" , top:0}}>

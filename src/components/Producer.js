@@ -289,7 +289,7 @@ function Producer(){
         function showProducers(){
           console.log(localStorage.getItem("user"))
           fetch("https://into-uncommon.herokuapp.com/intouncommon/getproducers",{
-            headers:{"header":localStorage.getItem("user")}
+            headers:{"header":releaseToken(localStorage.getItem("user"))}
           })
           .then(res=>res.json())
           .then((result)=>{

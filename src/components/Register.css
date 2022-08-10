@@ -1,0 +1,178 @@
+.main{
+    position: relative;
+    width: 100%;
+    height: auto;
+    background: rgb(21,18,40);
+}
+.headhome{
+    position: absolute;
+    width: 100%;
+    height: 6vw;
+    background: rgb(192,192,192);
+}
+.bodyhome{
+    position: absolute;
+    width: 100%;
+    height: 40vw;
+    background: rgb(21,18,40);
+    top: 6vw;
+}
+.instructionHolder{
+    position: absolute;
+    width: 100%;
+    height: 32%;
+    background-color: rgb(46, 58, 68);
+    opacity: 75%;
+    z-index: 2;
+}
+.lable{
+    position: absolute;
+    font-size: 1vw;
+    top: 95%;
+    color: rgb(222, 128, 235);
+}
+
+.input{
+    position: absolute;
+    width: 20vw;
+    top: 55%;
+    background: black;
+    color: white;
+    font-size: 0.9vw;
+}
+.name{
+    top: 35%;
+    left: 0;
+}
+.input1{
+    top: 39%;
+    left: 0;
+}
+.phone{
+    left: 23vw;
+    top: 35%;
+}
+.input2{
+    top: 39%;
+    left: 23vw;
+    width: 15vw;
+}
+
+.phone2{
+    left: 41vw;
+    top: 35%;
+}
+.inputw{
+    top: 39%;
+    left: 41vw;
+    width: 15vw;
+}
+.address{
+    top: 45%;
+    left: 0;
+    color: rgb(199, 82, 146);
+    font-size: 1.1vw;
+}
+.house{
+    left: 0;
+    top: 50%;
+}
+.input3{
+    top: 55%;
+    left: 0;
+    width: 25vw;
+}
+
+.street{
+    left: 18vw;
+    top: 50%;
+}
+.input4{
+    top: 55%;
+    left: 18vw;
+    width: 15vw;
+}
+.city{
+    left: 36vw;
+    top: 50%;
+}
+.input5{
+    top: 55%;
+    left: 36vw;
+    width: 15vw;
+}
+
+.district{
+    left: 28vw;
+    top: 50%;
+}
+.input4{
+    top: 55%;
+    left: 28vw;
+    width: 15vw;
+}
+.email{
+    left: 0;
+    top: 73%;
+}
+.input7{
+    top: 78%;
+    left: 0;
+    
+}
+.emailMsg{
+    position: absolute;
+    top: 61%;
+    left: 0;
+}
+
+.input8{
+    top: 78%;
+    left: 23vw;
+    width: 12vw;
+}
+
+.button{
+    position: absolute;
+    top: 78%;
+    left: 38vw;
+    font-size: 0.8vw;
+    color: rgb(207, 28, 28);
+    background: rgb(179, 187, 67);
+    cursor: pointer;
+
+}
+
+.submit{
+    left: 44.5vw;
+}
+
+.nic{
+    left: 23vw;
+    top: 73%;
+}
+
+.inputnic{
+    top: 78%;
+    left: 23vw;
+}
+.lablenic1,.lablenic2{
+    top: 87%;
+    left: 0;
+}
+.lablenic2{
+    left: 26.5vw;
+}
+
+.nic1,.nic2,.register{
+    top: 91.4%;
+    left: 0;
+}
+
+.nic2{
+    left: 26.5vw;
+}
+
+.register{
+    left: 51.5vw;
+}

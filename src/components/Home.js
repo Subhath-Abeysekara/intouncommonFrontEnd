@@ -18,10 +18,11 @@ function Home(){
     const[uncommonCategory , setUncommon] = useState([])
     const[size , setSize] = useState(40)
     const[bottom , setBottom] = useState(3)
+    
     // const[frame , setFrame] = useState(false)
     // const[sizeCom , setSizeCom] = useState(0)
 
-    const projects = [{id:1,project : "inventor",caption:"Join as a inventor with intouncommon"},{id:2,project : "designer",caption:"Join as a designer with intouncommon"},{id:3,project : "Register",caption:"register and add your product images"}]
+    const projects = [{id:1,project : "inventor",caption:"Join as a inventor with intouncommon"},{id:2,project : "designer",caption:"Join as a designer with intouncommon"},{id:3,project : "Register",caption:"request for register as a producer"},{id:4,project : "Upload",caption:"upload your product to website"}]
 
     const addImage=(n)=>{
         var x = document.getElementById("images")
@@ -88,6 +89,9 @@ function Home(){
     
   }
 
+  
+
+  
   const commonClick=(e)=>{
 
     
@@ -154,7 +158,20 @@ function Home(){
   const projectLoad=(catID)=>{
     console.log(catID)
     localStorage.setItem("project",catID);
-    window.location = "/project"  
+    if(catID===3){
+      window.location="/register"
+    }
+    else{
+      if(catID===4){
+        window.location="/uploadimages"
+
+      }
+      else{
+        window.location = "/project"
+
+      }
+    }
+      
   }
 
 
@@ -290,6 +307,7 @@ function Home(){
                 </div>
           }
         </div>
+       
     );
 }
 

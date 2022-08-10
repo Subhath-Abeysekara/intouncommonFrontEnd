@@ -70,6 +70,7 @@ function Login(){
       }
       }
       else{
+        console.log(result)
         console.log(tokenChange(result))
         localStorage.setItem("user",tokenChange(result))
         localStorage.removeItem("count")
