@@ -155,14 +155,52 @@
 }
 
 .footer{
-    position: absolute;
-    bottom: -2%;
+    position: fixed;
+    bottom: 0;
     width: 100%;
     height: 7%;
-    background: black;
+    background: rgb(21,18,40);
 
 }
 
+.creater{
+
+    position: fixed;
+    width: 3vw;
+    height: 3vw;
+    bottom: 0%;
+    right: 0;
+   
+    border-radius: 50%;
+}
+
+.createrTopic{
+    position: absolute;
+    color: rgb(241, 233, 233);
+    bottom: 2%;
+    z-index: 2;
+    left: 91.5%;
+    font-size: 0.9vw;
+    text-shadow: -2px 2px 4px rgba(238, 234, 234, 0.7),
+    2px -2px 0 rgba(34, 33, 33, 5);
+}
+
+.icode{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+
+
+.creater:hover{
+    width: 6vw;
+    height: 6vw;
+    cursor: pointer;
+    right: 0;
+    bottom: 0;
+}
 .commonProduct{
     left: 21.96%;
 }

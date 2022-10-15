@@ -54,6 +54,7 @@ function PendingProducers(){
           .then(res=>res.json())
           .then((result2)=>{
             alert(result2)
+            console.log(result2)
             if(result2!=null){
                 setPendingProducer(result2)
             setShow(true)

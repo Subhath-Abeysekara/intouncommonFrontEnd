@@ -16,15 +16,20 @@ function UploadImage(){
     const[errorStringS,setErrorStringS] = useState("")
     const[errorStringE,setErrorStringE] = useState("")
     const[district,setDistrict] = useState("Matara")
+    const[lastId , setLastId] = useState(0)
     const[contact , setContact] = useState("")
     const[whatsapp , setWhatsapp] = useState("")
     const[address , setAddress] = useState("")
     const[home , setHome] = useState("")
     const[name , setName] = useState("")
     const[email , setEmail] = useState("")
-    const[fileUpload,setFileUpload] = useState(null)
+    const[fileUpload,setFileUpload] = useState([])
+    const[pendingProducts , setPendingProducts] = useState([])
 
     const districts = [{value:"Matara"},{value:"Galle"},{value:"Hambanthota"},{value:"Colombo"},{value:"Gampaha"},{value:"Kaluthara"},{value:"Kandy"},{value:"Nuwaraeliya"},{value:"Matale"},{value:"Badulla"},{value:"Monaragala"},{value:"Ampara"},{value:"Baticlo"},{value:"Trinco"},{value:"Jaffna"},{value:"Mannar"},{value:"Mullaitivu"},{value:"Kilinochchi"},{value:"vavuniya"},{value:"Polonnaruwa"},{value:"Anuradhapura"},{value:"Puttalama"},,{value:"Kurunagala"},{value:"Kegalle"},{value:"Rathnapura"}]
+
+
+    const delay=(ms) => new Promise((resolve)=>setTimeout(resolve , ms))
 
     function onHolder1(){
         setLogicIns(true);
@@ -48,64 +53,78 @@ function UploadImage(){
             if(fileUpload == null){
                 alert("file havent selected")
                 return}
+                alert(fileUpload)
+
+                // alert(fileUpload[i])
                 fetch("https://into-uncommon.herokuapp.com/intouncommon/getLastId",{
        
-      })
-      .then(res=>res.json())
-      .then((result)=>{
-        const imageRef = ref(storage ,"pending/files"+result)
-        uploadBytes(imageRef,fileUpload).then((snapshot)=>{
-           // alert("File Submited")
-            getDownloadURL(snapshot.ref).then((url) => {
-               // console.log(url)
-                const pendingProducts = [{url:url}]
-                setAddress(home+","+district)
-                const pendingProducers = { name:name,contact:contact,whatsapp:whatsapp,address:home+","+district,email:email,pendingProducts}
-                fetch("https://into-uncommon.herokuapp.com/intouncommon/addPending",{
-              method:"POST",
-              headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*"},
-              body : JSON.stringify(pendingProducers)
-            })
-            .then(res=>res.text())
-            .then((result2)=>{
-               // console.log(result2)
-                if(result2==="added"){
-                    //alert("Added")
-                    setErrorStringE("Your File Is Uploaded , Thank You!")
-                    setErrorStringS("ඔබගේ ගොනුව උඩුගත කර ඇත, ස්තූතියි!")
-                    alert("Your File Is Uploaded , Thank You! / ඔබගේ ගොනුව උඩුගත කර ඇත, ස්තූතියි!")
-                    setLogicIns(true);
-                    setEror(true)
-                    setSubmit(true)
-                }
-                else{
-                    setEror(true)
-                    setSubmit(false)
-                    alert("error")
-                    if(result2==="error contact"){
-                        
-                        setErrorStringE("Error Contact Type")
-                        setErrorStringS("දුරකථන අංකයේ  දෝෂයක් පවතී")
+                })
+                .then(res=>res.json())
+                .then((result)=>{
+                    const pendingProducts=[]
+                    for(let i=0; fileUpload[i]!=null ; i++){
+                        const imageRef = ref(storage ,"pending/files"+result+i)
+                        uploadBytes(imageRef,fileUpload).then((snapshot)=>{
+                           // alert("File Submited")
+                            getDownloadURL(snapshot.ref).then((url) => {
+                               // alert(url)
+                                 pendingProducts[i]={url:url}
+                            })
+                        })
                     }
-                    else{
-                        if(result2==="empty fields"){
-                            setErrorStringE("You are not existing one please fill the full form")
-                        setErrorStringS("ඔබ දැනට භාවිතා කල කෙනෙක් නොවේ, කරුණාකර සම්පූර්ණ පෝරමය පුරවන්න")
-                           // alert("You are not existing one please fill the full form")
+
+                    setTimeout(function(){ //alert(pendingProducts)
+                        setAddress(home+","+district)
+                        const pendingProducers = { name:name,contact:contact,whatsapp:whatsapp,address:home+","+district,email:email,pendingProducts}
+                        fetch("https://into-uncommon.herokuapp.com/intouncommon/addPending",{
+                      method:"POST",
+                      headers:{"Content-Type":"application/json","Access-Control-Allow-Origin":"*"},
+                      body : JSON.stringify(pendingProducers)
+                    })
+                    .then(res=>res.text())
+                    .then((result2)=>{
+                        console.log(result2)
+                        if(result2==="added"){
+                            //alert("Added")
+                            setErrorStringE("Your File Is Uploaded , Thank You!")
+                            setErrorStringS("ඔබගේ ගොනුව උඩුගත කර ඇත, ස්තූතියි!")
+                            alert("Your File Is Uploaded , Thank You! / ඔබගේ ගොනුව උඩුගත කර ඇත, ස්තූතියි!")
+                            setLogicIns(true);
+                            setEror(true)
+                            setSubmit(true)
                         }
                         else{
-                            setErrorStringE("Error : Retry")
-                        setErrorStringS("නැවත උත්සාහ කරන්න")
-                           // alert("Error : Retry")
+                            setEror(true)
+                            setSubmit(false)
+                            alert("error")
+                            if(result2==="error contact"){
+                                
+                                setErrorStringE("Error Contact Type")
+                                setErrorStringS("දුරකථන අංකයේ  දෝෂයක් පවතී")
+                            }
+                            else{
+                                if(result2==="empty fields"){
+                                    setErrorStringE("You are not existing one please fill the full form")
+                                setErrorStringS("ඔබ දැනට භාවිතා කල කෙනෙක් නොවේ, කරුණාකර සම්පූර්ණ පෝරමය පුරවන්න")
+                                   // alert("You are not existing one please fill the full form")
+                                }
+                                else{
+                                    setErrorStringE("Error : Retry")
+                                setErrorStringS("නැවත උත්සාහ කරන්න")
+                                   // alert("Error : Retry")
+                                }
+                            }
+                            
                         }
-                    }
+                    })
+                    }, 10000);
                     
-                }
-            })
-        })
-      })
-           
-        })
+                         
+                     
+                  })
+
+
+        
     } 
 }
 useEffect(()=>{
@@ -178,8 +197,8 @@ useEffect(()=>{
                 <label  className="lable email">Email</label><p style={{color:"rgb(199,200,161)", fontSize:"1.04vw"}} className="emailMsg">Email is not compulsory,<br></br><span style={{color:"rgb(251,201,74)"}}>විද්‍යුත් තැපෑල අනිවාර්ය නොවේ</span></p>
                 <input placeholder="විද්යුත් තැපෑල " className="input input7"></input>
             </form>
-            <input type="file"  placeholder="Choose File " className="input input8"
-            onChange={(e)=>setFileUpload(e.target.files[0])}></input>
+            <input type="file"  placeholder="Choose File " className="input input8" multiple
+            onChange={(e)=>setFileUpload(e.target.files)}></input>
             <button className="button upload" onClick={addFile}><b>SUBMIT ALL</b></button>
           </div>
           

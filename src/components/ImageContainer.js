@@ -17,6 +17,8 @@ function ImageContainer(){
     const [seconds,setSeconds] = useState(0)
     const images = [Image1,Image1,Image2,Image3,Image4,Image5,Image6,Image7,Image8,Image9,Image10,Image10]
     
+    
+
    if(localStorage.getItem("i")==images.length){
        localStorage.removeItem("i")
    }

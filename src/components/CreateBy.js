@@ -1,12 +1,23 @@
 import React from "react";
+import ImageDis from './Images/ALL FOR WEB (1).png';
+import ImageIcode from './Images/icode3.png';
+import './Create.css';
 
 function CreateBy(){
+
+    function create(){
+        window.location="/"
+      }
+
     return(
-        <div>
-            <h1 style={{fontSize : "4vw"}}>Create By Subhath Abeysekara<br></br>Bsc (Hons) Information Technology in University Of Moratuwa(UG)</h1>
-            <h3 style={{fontSize : "2vw"}}>Contact : (+94)779421354</h3>
-            <h3 style={{fontSize : "2vw"}}>Email : subath.abeysekara@gmail.com</h3>
+        <div className="mainCreate">
+            <div className="discription">
+                 <img src={ImageDis} className="imageDis"></img>
+            </div>
+            <div className="footer"><p className="createrTopic">#ALLForweb</p></div>
+          <div className="creater" onMouseLeave={create}><img className="icode" src={ImageIcode}></img></div>
         </div>
+
     )
 }
 

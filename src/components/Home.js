@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CommonProducts from "./CommonProduct";
 import {link} from 'react-router';
 import Image1 from './Images/image01.png';
+import ImageIcode from './Images/icode3.png';
 import sri from './Images/sri.jpg';
 
 import './Home.css';
@@ -35,6 +36,10 @@ function Home(){
         localStorage.setItem("i",i)
         alert(localStorage.getItem("i"))
         //x.src = images[i]
+    }
+
+    function create(){
+      window.location="/createBy"
     }
 
       const uncommonClick=(e)=>{
@@ -296,10 +301,12 @@ function Home(){
                   <ImageContainer></ImageContainer>
               </div>
               <div className="cover"></div>
-              <div className="madeBy" id="profile" style={{bottom:bottom+"%"}}><marquee><a href="/createBy"><p style={{color: "rgb(241, 233, 233)" , fontSize:"0.7vw" , bottom:"10%"}}>Create By : Subhath Abeysekara & three69 / Bsc(Hons) in Information Technology in UOM(UG) / Click Here For More Details</p></a></marquee></div> 
               
               
           </div>
+          
+          <div className="footer" ><p className="createrTopic">#ALLForweb</p></div>
+          <div className="creater" onMouseLeave={create}><img className="icode" src={ImageIcode}></img></div>
           
       </div>:<div>
                 <h2 style={{color: "rgb(109, 108, 108)" , fontSize:"2vw"}}>Loading</h2>
